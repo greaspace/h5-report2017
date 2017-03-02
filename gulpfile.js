@@ -160,30 +160,30 @@ gulp.task('wiredep', () => {
     }))
     .pipe(gulp.dest('app/styles'));
 
-  // gulp.src('app/*.html')
-  //   .pipe(wiredep({
-  //     ignorePath: /^(\.\.\/)*\.\./
-  //   }))
-  //   .pipe(gulp.dest('app'));
-
-  gulp.src('app/pugs/**/*.pug')
+  gulp.src('app/*.html')
     .pipe(wiredep({
-      ignorePath: /^(\.\.\/)*\.\./,
-      fileTypes: {
-        pug: {
-          block: /(([ \t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
-          detect: {
-            js: /script\(.*src=['"]([^'"]+)/gi,
-            css: /link\(.*href=['"]([^'"]+)/gi
-          },
-          replace: {
-            js: 'script(src=\'{{filePath}}\')',
-            css: 'link(rel=\'stylesheet\' href=\'{{filePath}}\')'
-          }
-        }
-      }
+      ignorePath: /^(\.\.\/)*\.\./
     }))
-    .pipe(gulp.dest('app/pugs'));
+    .pipe(gulp.dest('app'));
+
+  // gulp.src('app/pugs/**/*.pug')
+  //   .pipe(wiredep({
+  //     ignorePath: /^(\.\.\/)*\.\./,
+  //     fileTypes: {
+  //       pug: {
+  //         block: /(([ \t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
+  //         detect: {
+  //           js: /script\(.*src=['"]([^'"]+)/gi,
+  //           css: /link\(.*href=['"]([^'"]+)/gi
+  //         },
+  //         replace: {
+  //           js: 'script(src=\'{{filePath}}\')',
+  //           css: 'link(rel=\'stylesheet\' href=\'{{filePath}}\')'
+  //         }
+  //       }
+  //     }
+  //   }))
+  //   .pipe(gulp.dest('app/pugs'));
 });
 
 gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
