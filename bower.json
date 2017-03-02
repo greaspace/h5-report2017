@@ -1,0 +1,15 @@
+{
+  "name": "report",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap": "^3.3.7",
+    "animate.css": "^3.5.2",
+    "snabbt.js": "^0.6.4",
+    "iscroll": "^5.2.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
