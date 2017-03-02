@@ -53,7 +53,13 @@ gulp.task('lint:test', () => {
     .pipe(gulp.dest('test/spec'));
 });
 
-gulp.task('html', ['styles', 'scripts'], () => {
+gulp.task('pugs', () => {
+  return gulp.src('app/pugs/*.pug')
+    .pipe($.pug())
+    .pipe(gulp.dest('app'))
+});
+
+gulp.task('html', ['styles', 'scripts', 'pugs'], () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))
@@ -86,7 +92,7 @@ gulp.task('extras', () => {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('serve', () => {
-  runSequence(['clean', 'wiredep'], ['styles', 'scripts', 'fonts'], () => {
+  runSequence(['clean', 'wiredep'], ['pugs', 'styles', 'scripts', 'fonts'], () => {
     browserSync.init({
       notify: false,
       port: 9000,
@@ -104,6 +110,7 @@ gulp.task('serve', () => {
       '.tmp/fonts/**/*'
     ]).on('change', reload);
 
+    gulp.watch('app/pugs/**/*.pug', ['pugs']);
     gulp.watch('app/styles/**/*.scss', ['styles']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/fonts/**/*', ['fonts']);
@@ -135,6 +142,7 @@ gulp.task('serve:test', ['scripts'], () => {
     }
   });
 
+  gulp.watch('app/pugs/**/*.pug', ['pugs']);
   gulp.watch('app/scripts/**/*.js', ['scripts']);
   gulp.watch(['test/spec/**/*.js', 'test/index.html']).on('change', reload);
   gulp.watch('test/spec/**/*.js', ['lint:test']);
@@ -154,6 +162,24 @@ gulp.task('wiredep', () => {
       ignorePath: /^(\.\.\/)*\.\./
     }))
     .pipe(gulp.dest('app'));
+
+  gulp.src('app/pugs/**/*.pug')
+    .pipe(wiredep({
+      fileTypes: {
+        pug: {
+          block: /(([ \t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
+          detect: {
+            js: /script\(.*src=['"]([^'"]+)/gi,
+            css: /link\(.*href=['"]([^'"]+)/gi
+          },
+          replace: {
+            js: 'script(src=\'{{filePath}}\')',
+            css: 'link(rel=\'stylesheet\', href=\'{{filePath}}\')'
+          }
+        }
+      }
+    }))
+    .pipe(gulp.dest('app/pugs'))
 });
 
 gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
