@@ -1,0 +1,376 @@
+html, body, .wrapper, .ui-page {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: url("../images/idiom-background.jpg") left top no-repeat;
+  background-size: cover;
+  color: #ffffff;
+}
+
+.wrapper {
+  max-width: 640px;
+  position: relative;
+}
+
+.ui-page {
+  display: none;
+}
+
+.ui-hd, .ui-bd {
+  position: relative;
+}
+
+.ui-ft {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  bottom: 10px;
+}
+
+// loading page
+
+$loadingWrightLeft: 8px;
+@function amWritingLeft($left) {
+  @return $loadingWrightLeft + $left;
+}
+@keyframes amWriting {
+  //from, to, 10%, 15%, 20%, 25%, 30% { transform: rotateX(-30deg); transform-origin: left bottom; }
+  //60%, 90% { transform: rotateX(30deg); }
+  from, to { left: amWritingLeft(35px); bottom: 48px; }
+  10% { left: amWritingLeft(52px); bottom: 30px; }
+  15% { left: amWritingLeft(55px); bottom: 24px; }
+  20% { left: amWritingLeft(50px); bottom: 12px; }
+  25% { left: amWritingLeft(48px); bottom: 9px; }
+  30% { left: amWritingLeft(33px); bottom: 5px; }
+  45% { left: amWritingLeft(15px); bottom: 7px; }
+  60% { left: amWritingLeft(10px); bottom: 25px; }
+  90% { left: amWritingLeft(20px); bottom: 44px; }
+}
+
+.ui-loading-page {}
+.ui-loading {
+  padding-top: 80px;
+
+  .ui-loading-progress {
+    position: relative;
+    height: 150px;
+    width: 80px;
+    margin: 0 auto 15px;
+
+    .ui-loading-writing, .ui-loading-maobi, .ui-loading-percent {
+      position: absolute;
+    }
+
+    .ui-loading-maobi {
+      width: 80px;
+      left: 35px;
+      bottom: 48px;
+      animation: amWriting 1s linear infinite;
+    }
+
+    .ui-loading-writing {
+      width: 60px;
+      bottom: 0;
+      left: $loadingWrightLeft;
+    }
+    .ui-loading-percent {
+      bottom: 18px;
+      display: block;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  .ui-loading-text {
+  }
+}
+
+// home page
+
+#homePage {
+  background: url("../images/idiom-home-background.png") bottom center no-repeat;
+  background-size: 576px 234px;
+}
+
+@keyframes amWelcomeGame {
+  from, to { opacity: 0.8; }
+  50% { opacity: 0.1; }
+}
+@mixin absoluteTextCenter {
+  text-align: center;
+  width: 100%;
+}
+
+.ui-idiom-welcome {
+  position: relative;
+  top: 170px;
+}
+.idiom-welcome-lkq, .idiom-welcome-game, .idiom-welcome-play {
+  position: absolute;
+}
+
+.idiom-welcome-lkq {
+  @include absoluteTextCenter;
+
+  img {
+    width: 200px;
+  }
+}
+.idiom-welcome-game {
+  margin-left: -140px;
+  left: 50%;
+  top: 80px;
+
+  &, .idiom-welcome-game-mask {
+    background: url("../images/zanxida.png") no-repeat;
+    background-size: 280px 397px;
+    width: 280px;
+    height: 187px;
+  }
+
+  .idiom-welcome-game-mask {
+    background-position: left -199px;
+    animation: amWelcomeGame 200ms steps(2) infinite;
+  }
+}
+.idiom-welcome-play {
+  @include absoluteTextCenter;
+  top: 300px;
+
+  .btn-idom-play {
+    width: 160px;
+  }
+}
+
+// game page
+.idiom-game-image {
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 60px;
+
+  img {
+    width: 100%;
+  }
+}
+.idiom-game-input {
+  color: #333;
+  font-size: 24px;
+  text-align: center;
+}
+.idiom-game-answer {
+  position: relative;
+  top: 60px;
+  width: 240px;
+  left: 50%;
+  margin-left: -120px;
+
+  .idiom-game-form {
+    display: flex;
+
+    dd {
+      width: 60px;
+      height: 60px;
+      background-color: #ffffff;
+      flex: 1;
+      margin-left: -1px;
+      border-left: 1px solid #ededed;
+      line-height: 60px;
+
+      &:first-child {
+        border-left: none;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+  }
+
+  .idiom-game-answer-tip {
+    font-size: 24px;
+    position: absolute;
+    right: -12px;
+    top: -12px;
+    z-index: 10;
+
+    .glyphicon {
+      display: none;
+      border: 2px solid white;
+      border-radius: 50%;
+      background-color: white;
+    }
+  }
+
+  &.fail {
+    color: #ee3333;
+
+    .idiom-game-answer-tip .glyphicon-remove-sign{
+      display: inline-block;
+    }
+  }
+
+  &.success {
+    color: #339933;
+
+    .idiom-game-answer-tip .glyphicon-ok-sign{
+      display: inline-block;
+    }
+  }
+}
+
+.idiom-game-control {
+  position: relative;
+  top: 60px;
+  left: 50%;
+  width: 240px;
+  margin-left: -120px;
+
+  .idiom-game-words {
+
+    dd {
+      float: left;
+      width: 44px;
+      height: 44px;
+      margin: 0 5px 5px 0;
+      background-color: #ffffff;
+      border-radius: 3px;
+      line-height: 43px;
+
+      &:nth-child(5n){
+        margin-right: 0;
+      }
+
+      &.selected {
+        background-color: #ffff99;
+      }
+    }
+  }
+}
+@keyframes amGameTip {
+  from, to { opacity: 0.8; }
+  50% { opacity: 0.1; }
+}
+.ui-game-tip {
+  color: yellow;
+  animation: amGameTip 2s linear infinite;
+}
+
+// answer page
+#answerPage .ui-hd {
+  padding-top: 20px;
+}
+.ui-answer-title {
+  position: relative;
+  width: 160px;
+  margin: 0 auto;
+  border: 2px solid #ffff99;
+  color: #ffff99;
+  border-top: none;
+  border-bottom: none;
+  background: url("../images/idiom-background.jpg");
+  padding: 5px 0;
+
+  h1 {
+    margin: 0;
+  }
+}
+.ui-answer-title::after {
+  border-bottom: 2px solid #ffff99;
+  display: block;
+  width: 280px;
+  content: '\20';
+  position: absolute;
+  left: -60px;
+  top: 35px;
+  z-index: -1;
+}
+.ui-answer-subject {
+  position: relative;
+  width: 280px;
+  margin: 0 auto;
+  color: #ffff99;
+}
+
+@keyframes amAnswerBackground {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(7deg); }
+}
+
+@function answerItemPosition($index, $count) {
+
+}
+.ui-answer-bd-background, .ui-answer-bd {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  margin-left: -100px;
+}
+.ui-answer-bd-background {
+  border: 2px dashed #ffff99;
+  border-radius: 50%;
+  animation: amAnswerBackground 200ms linear infinite;
+}
+.ui-answer-item {
+  width: 100px;
+  font-size: 12px;
+  position: absolute;
+
+  .answer-item-image {
+    width: 80px;
+    height: 60px;
+  }
+}
+.ui-answer-3 {
+  .answer-item-0 {
+    left: -30px;
+    top: 0px;
+  }
+  .answer-item-1 {
+    right: -50px;
+    top: 50px;
+  }
+  .answer-item-2 {
+    left: 50px;
+    top: 150px;
+  }
+}
+
+@keyframes amRedirectGateClose {
+  from { width: 1000px; height: 1000px; margin-left: -1500px; margin-top: -1500px;}
+  to { width: 0px; height: 0px; margin-left: -1000px; margin-top: -1000px;}
+}
+@keyframes amRedirectGateOpen {
+  from { width: 0px; height: 0px; margin-left: -1000px; margin-top: -1000px;}
+  to { width: 1000px; height: 1000px; margin-left: -1500px; margin-top: -1500px;}
+}
+#redirect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  display: none;
+
+  .ui-redirect-gate {
+    position: absolute;
+    border: 1000px solid #ffff99;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    box-sizing: content-box;
+  }
+
+  .redirect-animation-close {
+    animation: amRedirectGateClose 1000ms linear;
+  }
+  .redirect-animation-open {
+    animation: amRedirectGateOpen 200ms linear;
+  }
+}

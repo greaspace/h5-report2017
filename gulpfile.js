@@ -53,16 +53,16 @@ gulp.task('lint:test', () => {
     .pipe(gulp.dest('test/spec'));
 });
 
-gulp.task('pugs', () => {
+gulp.task('templates', () => {
   return gulp.src('app/pugs/*.pug')
     .pipe($.pug({
       pretty: true
     }))
-    .pipe(gulp.dest('app'))
+    .pipe(gulp.dest('.tmp'))
 });
 
-gulp.task('html', ['styles', 'scripts', 'pugs'], () => {
-  return gulp.src('app/*.html')
+gulp.task('html', ['styles', 'scripts', 'templates'], () => {
+  return gulp.src('.tmp/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
@@ -92,10 +92,10 @@ gulp.task('extras', () => {
   }).pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', del.bind(null, ['.tmp', 'dist', 'app/*.html']));
+gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('serve', () => {
-  runSequence(['clean', 'wiredep'], ['pugs', 'styles', 'scripts', 'fonts'], () => {
+  runSequence(['clean', 'wiredep'], ['templates', 'styles', 'scripts', 'fonts'], () => {
     browserSync.init({
       notify: false,
       port: 9000,
@@ -108,12 +108,12 @@ gulp.task('serve', () => {
     });
 
     gulp.watch([
-      'app/*.html',
+      '.tmp/*.html',
       'app/images/**/*',
       '.tmp/fonts/**/*'
     ]).on('change', reload);
 
-    gulp.watch('app/pugs/**/*.pug', ['pugs']);
+    gulp.watch('app/pugs/**/*.pug', ['templates']);
     gulp.watch('app/styles/**/*.scss', ['styles']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/fonts/**/*', ['fonts']);
@@ -145,7 +145,7 @@ gulp.task('serve:test', ['scripts'], () => {
     }
   });
 
-  gulp.watch('app/pugs/**/*.pug', ['pugs']);
+  gulp.watch('app/pugs/**/*.pug', ['templates']);
   gulp.watch('app/scripts/**/*.js', ['scripts']);
   gulp.watch(['test/spec/**/*.js', 'test/index.html']).on('change', reload);
   gulp.watch('test/spec/**/*.js', ['lint:test']);
@@ -160,30 +160,41 @@ gulp.task('wiredep', () => {
     }))
     .pipe(gulp.dest('app/styles'));
 
-  gulp.src('app/*.html')
-    .pipe(wiredep({
-      ignorePath: /^(\.\.\/)*\.\./
-    }))
-    .pipe(gulp.dest('app'));
-
-  // gulp.src('app/pugs/**/*.pug')
+  // gulp.src('.tmp/*.html')
   //   .pipe(wiredep({
-  //     ignorePath: /^(\.\.\/)*\.\./,
-  //     fileTypes: {
-  //       pug: {
-  //         block: /(([ \t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
-  //         detect: {
-  //           js: /script\(.*src=['"]([^'"]+)/gi,
-  //           css: /link\(.*href=['"]([^'"]+)/gi
-  //         },
-  //         replace: {
-  //           js: 'script(src=\'{{filePath}}\')',
-  //           css: 'link(rel=\'stylesheet\' href=\'{{filePath}}\')'
-  //         }
-  //       }
-  //     }
+  //     ignorePath: /^(\.\.\/)*\.\./
   //   }))
-  //   .pipe(gulp.dest('app/pugs'));
+  //   .pipe(gulp.dest('.tmp'));
+
+  // gulp.src('app/pugs/*.pug')
+  //   .pipe($.pug({
+  //     pretty: true
+  //   }))
+  //   .pipe(gulp.dest('app'))
+  //   // .pipe(gulp.src('app/*.html'))
+  //   .pipe(wiredep({
+  //     ignorePath: /^(\.\.\/)*\.\./
+  //   }))
+  //   .pipe(gulp.dest('app'));
+
+  gulp.src('app/pugs/**/*.pug')
+    .pipe(wiredep({
+      ignorePath: /^(\.\.\/)*\.\./,
+      fileTypes: {
+        pug: {
+          block: /(([ \t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
+          detect: {
+            js: /script\(.*src=['"]([^'"]+)/gi,
+            css: /link\(.*href=['"]([^'"]+)/gi
+          },
+          replace: {
+            js: 'script(src=\'{{filePath}}\')',
+            css: 'link(rel=\'stylesheet\' href=\'{{filePath}}\')'
+          }
+        }
+      }
+    }))
+    .pipe(gulp.dest('app/pugs'));
 });
 
 gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {

@@ -4,10 +4,28 @@
 doctype html
 html(lang="en")
   head
-    include common/meta
+    include partials/meta
     title 2017政府工作报告 - 中国网
-    include common/styles
+    include partials/styles
+
+    // build:css styles/report.css
+    link(rel="stylesheet" href="styles/main.css")
+    // endbuild
   body
     .wrapper
+      // loading page
+      include report/loading
 
-    include common/scripts
+      // home page
+      include report/home
+
+      // detail page
+      include report/detail
+
+    // other partials
+    include common/wechat
+
+    include partials/scripts
+    // build:js scripts/report.js
+    script(src="scripts/main.js")
+    // endbuild

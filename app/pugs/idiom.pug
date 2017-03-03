@@ -1,0 +1,40 @@
+//
+   Created by Grea on 2017/3/2.
+
+doctype html
+html(lang="en")
+  head
+    include partials/meta
+    title 猜成语赞总理 - 中国网
+    include partials/styles
+
+    // build:css styles/idiom.css
+    link(rel="stylesheet" href="styles/idiom.css")
+    // endbuild
+  body
+    .wrapper
+      // loading page
+      include idiom/loading
+
+      // home page
+      include idiom/home
+
+      // game page
+      include idiom/game
+
+      // answer page
+      include idiom/anwser
+
+      // result page
+      include idiom/result
+
+    // change
+    include idiom/redirect
+
+    // other partials
+    include common/wechat
+
+    include partials/scripts
+    // build:js scripts/idiom.js
+    script(src="scripts/idiom.js")
+    // endbuild

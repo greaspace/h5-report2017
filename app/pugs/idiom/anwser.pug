@@ -1,0 +1,25 @@
+//
+   Created by Grea on 2017/3/2.
+
+#answerPage.ui-page.animated
+  .ui-scroll
+    .ui-scroll-inner
+      .ui-hd
+        div.ui-answer-title.text-center
+          span 总理的角色
+          h1 先行者
+        div.ui-answer-subject
+          p 概述概述概述概述概述，概述概述概述概述概述概述，概述概述概述概述概述概述概述。
+      .ui-bd
+        .ui-answer-bd-background
+        .ui-answer-bd.ui-answer-3
+          - for (var x = 0; x < 3; x++)
+            .ui-answer-item.animated(class="answer-item-" + x)
+              .answer-item-image
+                img(src="http://mat1.gtimg.com/news/2015/xidada/7.png" width="87" height="64")
+              p.answer-item-text
+                | 概述概述概述概述概述，概述概述概述概
+
+      .ui-ft.clearfix
+        p.text-center
+          button.btn-next.btn.btn-sm.btn-success 下一题
