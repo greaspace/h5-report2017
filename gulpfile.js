@@ -78,8 +78,8 @@ gulp.task('images', () => {
 
 gulp.task('fonts', () => {
   // var src = require('main-bower-files')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {}).concat('app/fonts/**/*');
-  return gulp.src(['app/fonts/**/*'])
-    .pipe($.if(dev, gulp.dest('.tmp/fonts'), gulp.dest('dist/fonts')));
+  return gulp.src('app/fonts/**/*')
+    .pipe(gulp.dest(dev ? '.tmp/fonts' : 'dist/fonts'));
 });
 
 gulp.task('extras', () => {
