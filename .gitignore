@@ -2,6 +2,7 @@ node_modules
 dist
 .tmp
 .idea
+demo.sh
 bower_components
 test/bower_components
 app/*.html
