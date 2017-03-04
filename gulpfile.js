@@ -58,7 +58,10 @@ gulp.task('templates', () => {
     .pipe($.pug({
       pretty: true
     }))
-    .pipe(gulp.dest('.tmp'))
+    .pipe(wiredep({
+      ignorePath: /^(\.\.\/)*\.\./
+    }))
+    .pipe(gulp.dest('.tmp'));
 });
 
 gulp.task('html', ['styles', 'scripts', 'templates'], () => {
@@ -159,33 +162,6 @@ gulp.task('wiredep', () => {
       ignorePath: /^(\.\.\/)+/
     }))
     .pipe(gulp.dest('app/styles'));
-
-  if (!dev) {
-    gulp.src('.tmp/*.html')
-      .pipe(wiredep({
-        ignorePath: /^(\.\.\/)*\.\./
-      }))
-      .pipe(gulp.dest('.tmp'));
-  } else {
-    gulp.src('app/pugs/**/*.pug')
-      .pipe(wiredep({
-        ignorePath: /^(\.\.\/)*\.\./,
-        fileTypes: {
-          pug: {
-            block: /(([ \t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
-            detect: {
-              js: /script\(.*src=['"]([^'"]+)/gi,
-              css: /link\(.*href=['"]([^'"]+)/gi
-            },
-            replace: {
-              js: 'script(src=\'{{filePath}}\')',
-              css: 'link(rel=\'stylesheet\', href=\'{{filePath}}\')'
-            }
-          }
-        }
-      }))
-      .pipe(gulp.dest('app/pugs'));
-  }
 });
 
 gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {

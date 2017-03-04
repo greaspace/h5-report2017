@@ -29,7 +29,7 @@ $(function () {
         text = '100%';
         clearInterval(si);
 
-        loading.trigger('load-finished')
+        loading.trigger('load-finished');
       }
       $('.ui-loading-percent', loading).text(text);
     }, 100);
