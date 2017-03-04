@@ -179,7 +179,7 @@ gulp.task('wiredep', () => {
             },
             replace: {
               js: 'script(src=\'{{filePath}}\')',
-              css: 'link(rel=\'stylesheet\' href=\'{{filePath}}\')'
+              css: 'link(rel=\'stylesheet\', href=\'{{filePath}}\')'
             }
           }
         }
