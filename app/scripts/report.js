@@ -1,117 +1,120 @@
 $(function () {
+  var EVENT_ANIMATION_END = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+
   // loading page
-  $('.ui-loading .loading-image-mask').animate({
-    height: 0
-  }, {
-    duration: 2000,
-    // easing: 'swing',
-    progress: function (animation, progress) {
-      progress = parseInt(progress * 100) + '%';
-      $('.ui-loading .loading-text').text(progress);
-      $('.ui-loading .loading-image-progress-bar').css({
-        width: progress
+  var $loadingPage = $('#loadingPage');
+  $loadingPage
+    .on(EVENT_ANIMATION_END, function (e) {
+      if(e.target !== this || e.originalEvent.animationName !== 'fadeOut') return;
+
+      $(this).hide();
+      $homePage.show(function () {
+        $(this).trigger('shown');
+      }).addClass('fadeIn');
+    })
+    .show(function(){
+      $('.ui-loading .ui-loading-mask', $loadingPage).animate({
+        height: 0
+      }, {
+        duration: 2000,
+        progress: function (animation, progress) {
+          progress = parseInt(progress * 100) + '%';
+          $('.ui-loading .ui-loading-progress', $loadingPage).text(progress);
+        },
+        done: function () {
+          $loadingPage.addClass('fadeOut');
+        }
       });
-    },
-    done: function () {
-      $('#loadingPage').addClass('fadeOut');
-    }
-  });
+    })
+    .addClass('fadeIn');
 
   // main page
-  $('#loadingPage').one('animationend', function () {
-    $(this).hide();
+  var $homePage = $('#homePage');
+  var $homeNavigation = $('.ui-navs', $homePage);
+  $homeNavigation.delegate('li', 'click', function (e) {
+    var $this = $(this), index = $this.data('index');
+    changeDetailContent(index);
+    $homePage.hide();
+    $asideNavigation.find('li')
+      .removeClass('active')
+      .filter('[data-index='+index+']')
+      .addClass('active');
+    $detailPage.show(function(){
+      // $('.ui-hd', this).addClass('slideInDown');
+      // $('.ui-bd', this).addClass('zoomIn');
+    });
 
-    $('#mainPage').show().addClass('fadeIn');
   });
-
-  var navs = $('.ui-index-navs li').addClass('animated');
-  navs.filter(':odd').addClass('slideInRight');
-  navs.filter(':even').addClass('slideInLeft');
-
-  $('#mainPage').one('animationend', function () {
-
-    var elemBodyWrapper = $('.ui-body-wrapper', this);
-    new IScroll(elemBodyWrapper[0]);
-    new IScroll('.ui-index-navs-wrapper');
-  });
-
-  $('#mainPage .ui-navs li').on('click touchstart', function () {
-    $('#articlePage').show().addClass('zoomIn');
-    $('#mainPage').hide();
+  $homePage.one('shown', function () {
+    !$('li', $homeNavigation).length && $.each(DATA_REPORT_2017.navs, function (i, item) {
+      var nav = item.split(' ');
+      $('<li>').attr('data-index', i)
+        .append($('<b>').text(nav[0]))
+        .appendTo($asideNavigation)
+        .clone()
+        .addClass('animated')
+        .addClass(i&1 ? 'slideInRight':'slideInLeft')
+        .append($('<span>').text(nav[1]))
+        .appendTo($homeNavigation);
+    });
   });
 
   // article page
-  $('.ui-article-page').one('animationend', function () {
-    var elemBodyWrapper = $('.ui-body-wrapper', this);
-    new IScroll(elemBodyWrapper[0]);
-  });
+  var $detailPage = $('#detailPage'),
+    $detailAside = $('#detailAside'),
+    $asideToggle = $('.ui-aside-toggle', $detailPage),
+    $detailBody = $('.ui-bd', $detailPage);
 
-  var width = $('#articlePage .ui-body-wrapper').width();
-  $('.ui-sidebar-toggle').on('click touchstart', function (e) {
-    e.preventDefault();
+  // aside toggle
+  $asideToggle.on('click', function (e) {
+    var current = $(this).hasClass('on');
+    $asideToggle.toggleClass('on', !current);
 
-    var active = $(this).hasClass('on');
-    var $elem = $('#articlePage article');
-    var aside = $('#articlePage aside');
-
-    if (active){
-      $(this).removeClass('on');
-
-      aside.animate({
-        right: -120
-      }, function () {
-        $(this).hide()
-      })
-    } else {
-      $(this).addClass('on');
-
-      aside.show().animate({
-        right: 0
-      });
-    }
-
-    $(this).animate({textIndent: 0}, {
+    !current && $detailAside.show();
+    $detailAside.animate({
+      right: current ? -100 : 0
+    }, {
       progress: function (animation, progress) {
-        $(this).css({
-          transform: 'rotateZ(' + 360*scale(progress) + 'deg)'
-        })
-      }
-    });
-
-    $elem.animate({textIndent: 0}, {
-      progress: function (animation, progress) {
-        $elem.css({
+        $detailBody.css({
           transform: 'scaleX('+ (1-0.4*scale(progress)) +') skewY(' + 14*scale(progress) + 'deg)'
         });
+      },
+      done: function () {
+        current && hideDetailAside();
       }
     });
 
     function scale(progress) {
-      return active ? 1-progress : progress;
+      return current ? 1-progress : progress;
     }
-
-
   });
 
-  $('#articlePage .ui-navs li').on('click touchstart', function () {
-    var $elem = $('#articlePage article');
-    var aside = $('#articlePage aside');
-    $elem.animate({textIndent: 0}, {
+  // helper
+  function hideDetailAside() {
+    $detailAside.hide();
+    $asideToggle.removeClass('on');
+  }
+
+  // navigation
+  var $asideNavigation = $('.ui-menus', $detailPage);
+  $asideNavigation.delegate('li', 'click', function () {
+    if($(this).is('.active')) return;
+
+    $(this).addClass('active').siblings().removeClass('active');
+
+    var index = $(this).data('index');
+    $detailAside.animate({ right: -100 }, {
       progress: function (animation, progress) {
-        $('.ui-sidebar-toggle').removeClass('on');
-        aside.animate({
-          right: -120
-        }, function () {
-          $(this).hide()
-        });
-        $elem.css({
+        $detailBody.css({
           transform: 'scaleX('+ (0.6-0.6*progress) +') skewY(14deg)'
         });
       },
       done: function () {
-        $elem.delay(500).animate({textIndent: 0}, {
+        hideDetailAside();
+        changeDetailContent(index);
+        $detailBody.delay(500).animate({textIndent: 0}, {
           progress: function (animation, progress) {
-            $elem.css({
+            $detailBody.css({
               transform: 'scaleX('+ progress +') skewY(' + 14*(1-progress) +'deg)'
             });
           }
@@ -120,11 +123,35 @@ $(function () {
     });
   });
 
-  $('.panel-toggle').on('click touchstart', function (e) {
+
+  var $title = $('.ui-module-title', $detailPage);
+  var $content = $('.ui-content', $detailPage);
+  $content.delegate('.ct-collapse-toggle', 'click', function (e) {
     e.preventDefault();
-    // var $parent = $(this).parent('.panel'),
-    //     $p = $('p', $parent);
-    $(this).closest('.panel').find('p').toggle();
+    $(this).parent('.ct-section').toggleClass('off');
   });
+
+  var $scroll = $('#uiContentScroll');
+  function changeDetailContent(index) {
+    var data = DATA_REPORT_2017.items[index];
+    if(!data) return;
+
+    $title.text(data.title);
+    $content.empty();
+
+    $.each(data.content, function(i, item){
+      var section = $('<section>').addClass('ct-section off'), box;
+      $('<h3>').addClass('ct-title').text(item.h).appendTo(section);
+      box = $('<div>').addClass('ct-collapse').appendTo(section);
+      $('<div>').addClass('ct-collapse-toggle').appendTo(section);
+
+      $.each(item.p, function (i, p) {
+        $('<p>').text(p).appendTo(box);
+      });
+      section.appendTo($content);
+    });
+
+    new IScroll($scroll[0]);
+  }
 
 });

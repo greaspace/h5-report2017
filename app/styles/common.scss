@@ -1,0 +1,34 @@
+html, body, .wrapper, .ui-page, .ui-scroll, .ui-full {
+  width: 100%;
+  height: 100%;
+}
+
+.ui-page {
+  display: none;
+}
+
+.ui-scroll {
+  max-width: 640px;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+}
+
+.ui-hd, .ui-bd {
+  width: 100%;
+  position: absolute;
+}
+.ui-hd {
+  top: 0;
+}
+.ui-bd {
+  top: 0;
+  bottom: 0;
+}
+
+.ui-ft {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  bottom: 10px;
+}

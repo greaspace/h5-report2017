@@ -1,0 +1,261 @@
+@import "common";
+
+$bmColor: #e8143a;
+$textBlack: #3a3a3a;
+$textRed: #e8143a;
+$btnTextRed: #ff4868;
+$btnTextGrey: #0e477c ;
+$navTextYellow: #ffef40;
+$textLoading: #e1cd8f;
+
+
+body {
+  background-color: $bmColor;
+  color: $textBlack;
+}
+
+// loading page
+
+#loadingPage, #detailPage {
+  background: url("../images/bg-loading.png") right bottom;
+  background-size: 100% auto;
+}
+
+.ui-ft {
+  .ui-copyright-logo img {
+    width: 60%;
+  }
+  .ui-copyright-text img {
+    width: 40%;
+  }
+}
+
+.ui-loading {
+  color: $textLoading;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -80px auto auto -70px;
+
+  .ui-loading-text {
+    margin-top: 10px;
+  }
+}
+
+.ui-report-info {
+  width: 141px;
+  margin: 0 auto;
+
+  .ui-report-text {
+    float: left;
+    padding-top: 5px;
+
+    img {
+      height: 93px;
+    }
+  }
+
+  .ui-report-logo {
+    margin-left: 23px;
+    position: relative;
+
+    img {
+      height: 98px;
+    }
+
+    .ui-loading-mask {
+      position: absolute;
+      z-index: 1;
+      overflow: hidden;
+      top: 0;
+
+      div {
+        height: 98px;
+        background-color: $bmColor;
+        opacity: 0.3;
+        mask-image: url("../images/report-logo.png");
+        mask-size: 100% 100%;
+      }
+    }
+  }
+}
+
+#homePage {
+  background: url("../images/bg-home.png") right bottom;
+  background-size: 100% auto;
+  padding-top: 20%;
+}
+
+.ui-navs-wrapper {
+  width: 260px;
+  margin: 15px auto 0;
+  height: 360px;
+  overflow: hidden;
+  position:relative;
+
+  .ui-navs {
+    text-align: center;
+    width: 260px;
+    margin: 0 auto;
+    position: absolute;
+
+    li {
+      margin-bottom: 15px;
+      background: url("../images/menu-bg.png") no-repeat;
+      background-size: cover;
+      float: none;
+      position: relative;
+      width: 110px;
+      height: 75px;
+      display: inline-block;
+
+      &:nth-child(even) {
+        margin-left: 15px;
+      }
+
+      &.focus:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0px;
+        width: 0px;
+        height: 0px;
+        border-top: 10px solid #d94751;
+        border-right: 10px solid transparent;
+      }
+
+      b {
+        display: block;
+        color: $btnTextRed;
+        font-size: 1.5em;
+        font-weight: normal;
+        margin: 15px 0 5px 0
+      }
+
+      span {
+        display: block;
+        color: $btnTextGrey;
+        font-size: 0.75em;
+      }
+    }
+  }
+}
+
+// detail Page
+#detailPage .ui-hd {
+  height: 44px;
+  line-height: 44px;
+
+  & + .ui-bd {
+    top: 44px;
+    background-color: #f7f7f7;
+    transform-style: preserve-3d;
+    transform-origin: 0 0 0;
+  }
+}
+
+@keyframes amToggleAsideOpen {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+@keyframes amToggleAsideClose {
+  from { transform: rotateZ(360deg); }
+  to { transform: rotateZ(0deg); }
+}
+.ui-topbar {
+  display: flex;
+
+  .ui-title {
+    flex: 4;
+    font-size: 16px;
+    color: #ffffff;
+
+    .ui-module-title{
+      color: $navTextYellow;
+    }
+  }
+
+  .ui-aside-toggle {
+    flex: 1;
+    text-align: right;
+
+    img {
+      width: 24px;
+      box-sizing: content-box;
+      animation: amToggleAsideClose 500ms linear;
+    }
+
+    &.on img{
+      animation: amToggleAsideOpen 500ms linear;
+    }
+  }
+}
+.ui-aside {
+  width: 100px;
+  position: absolute;
+  right: -100px;
+  top: 44px;
+  bottom: 0;
+  padding-top: 44px;
+  display: none;
+
+  .ui-menus {
+    font-size: 1.25em;
+    font-weight: normal;
+    color: white;
+    line-height: 44px;
+
+    li.active {
+      color: $navTextYellow;
+      text-decoration: underline;
+    }
+  }
+}
+
+.ui-content {
+  .ct-section {
+    padding: 10px 15px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+
+    .ct-collapse-toggle {
+      height: 41px;
+      background: url("../images/btn-close.png") center center no-repeat;
+      background-size: auto 50%;
+    }
+
+    &.off {
+      .ct-collapse {
+        max-height: 110px;
+        overflow: hidden;
+      }
+
+      .ct-collapse-toggle {
+        background-image: url("../images/btn-expand.png");
+      }
+    }
+  }
+  .ct-title {
+    border-bottom: 2px dashed #ededed;
+    padding-bottom: 15px;
+    font-size: 1.25em;
+    margin-bottom: 15px;
+  }
+
+  p {
+    text-indent: 2em;
+
+    &:first-child {
+      text-indent: 0;
+      &:before {
+        content: '原文';
+        background-color: #999999;
+        color: #ffffff;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-size: 0.75em;
+        margin-right: 10px;
+      }
+    }
+  }
+}
