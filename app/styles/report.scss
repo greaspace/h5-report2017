@@ -245,9 +245,18 @@ body {
 
   p {
     text-indent: 2em;
+  }
+}
 
-    &:first-child {
+.ui-abstract {
+  .ui-abstract-inner .ct-section:last-child{
+    margin-bottom: 0;
+  }
+
+  .ct-section {
+    p {
       text-indent: 0;
+
       &:before {
         content: '原文';
         background-color: #999999;

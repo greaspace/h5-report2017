@@ -47,15 +47,14 @@ $(function () {
   });
   $homePage.one('shown', function () {
     if($('li', $homeNavigation).length) return;
-    $.each(DATA_REPORT_2017.navs, function (i, item) {
-      var nav = item.split(' ');
+    $.each(DATA_REPORT_2017.items, function (i, item) {
       $('<li>').attr('data-index', i)
-        .append($('<b>').text(nav[0]))
+        .append($('<b>').text(item.title))
         .appendTo($asideNavigation)
         .clone()
         .addClass('animated')
         .addClass(i&1 ? 'slideInRight':'slideInLeft')
-        .append($('<span>').text(nav[1]))
+        .append($('<span>').text(item.subtitle))
         .appendTo($homeNavigation);
     });
     new IScroll('.ui-navs-wrapper', { tap: true });
@@ -68,7 +67,7 @@ $(function () {
     $detailBody = $('.ui-bd', $detailPage);
 
   // aside toggle
-  $asideToggle.on(EVENT_SINGLE_TOUCH, function (e) {
+  $asideToggle.on('touchstart', function (e) {
     var current = $(this).hasClass('on');
     $asideToggle.toggleClass('on', !current);
 
@@ -127,6 +126,8 @@ $(function () {
 
 
   var $title = $('.ui-module-title', $detailPage);
+  var $abstract = $('#detailAbscract', $detailPage);
+  var $abstractInner = $abstract.find('.ui-abstract-inner');
   var $content = $('.ui-content', $detailPage);
   $content.delegate('.ct-collapse-toggle', EVENT_SINGLE_TOUCH, function (e) {
     e.preventDefault();
@@ -138,9 +139,22 @@ $(function () {
     var data = DATA_REPORT_2017.items[index];
     if(!data) return;
 
+    // set title
     $title.text(data.title);
-    $content.empty();
 
+    // reset abstract
+    $abstractInner.empty();
+    $.each(data.abstracts, function (i, item) {
+      var section = $('<section>').addClass('ct-section');
+      $('<h3>').addClass('ct-title').text(item.h).appendTo(section);
+      $.each(item.p, function (i, p) {
+        $('<p>').html(p).appendTo(section);
+      });
+      section.appendTo($abstractInner);
+    });
+
+    // reset content
+    $content.empty();
     $.each(data.content, function(i, item){
       var section = $('<section>').addClass('ct-section off'), box;
       $('<h3>').addClass('ct-title').text(item.h).appendTo(section);
@@ -148,29 +162,10 @@ $(function () {
       $('<div>').addClass('ct-collapse-toggle').appendTo(section);
 
       $.each(item.p, function (i, p) {
-        $('<p>').text(p).appendTo(box);
+        $('<p>').html(p).appendTo(box);
       });
       section.appendTo($content);
     });
   }
 
-});
-
-$(function () {
-  $(document).on('WeixinJSBridgeReady', function(){
-    // 发送给好友
-    WeixinJSBridge.on('menu:share:appmessage', function (argv) {
-      WeixinJSBridge.invoke('sendAppMessage', {
-        'appid': '123',
-        'img_url': 'http://bcs.duapp.com/api100/image/logo/lover.jpg',
-        'img_width': '160',
-        'img_height': '160',
-        'link': 'https://greaspace.github.io/h5-report2017/dist/report.html',
-        'desc':  '中国网出品',
-        'title': '2017政府工作报告 - 中国网'
-      }, function (res) {
-        _report('send_msg', res.err_msg);
-      })
-    });
-  })
 });
