@@ -186,9 +186,10 @@ body {
   .ui-aside-toggle {
     flex: 1;
     text-align: right;
+    padding-right: 10px;
 
     img {
-      width: 24px;
+      width: 32px;
       box-sizing: content-box;
       animation: amToggleAsideClose 500ms linear;
     }

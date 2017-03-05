@@ -49,6 +49,8 @@ $(function () {
       .filter('[data-index='+index+']')
       .addClass('active');
   });
+
+  // 初始化首页
   $homePage.one('shown', function () {
     if($('li', $homeNavigation).length) return;
     $.each(DATA_REPORT_2017.items, function (i, item) {
@@ -61,7 +63,7 @@ $(function () {
         .append($('<span>').text(item.subtitle))
         .appendTo($homeNavigation);
     });
-    new IScroll('.ui-navs-wrapper', { tap: true });
+    new IScroll('.ui-navs-wrapper', { tap: true, scrollbars: true });
   });
 
   // detail page
@@ -156,6 +158,7 @@ $(function () {
     $title.text(data.title);
 
     // reset media
+    $player.jPlayer('destroy');
     $player.jPlayer({
       ready: onPlayerReady,
       supplied: 'm4v',
@@ -198,6 +201,6 @@ $(function () {
       });
       section.appendTo($content);
     });
-    contentScroller && contentScroller.refresh();
+    // contentScroller && contentScroller.refresh();
   }
 });
