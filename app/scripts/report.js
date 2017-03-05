@@ -39,9 +39,10 @@ $(function () {
     $detailPage.show(function(){
       // +++ scroll bar
 
-      contentScroller = new IScroll($scroll[0], {
+      contentScroller = contentScroller || new IScroll($scroll[0], {
         tap: true
       });
+      contentScroller.refresh();
     });
 
     $asideNavigation.find('li')
@@ -155,7 +156,7 @@ $(function () {
     $player.jPlayer('play');
   }
 
-  var $scroll = $('#uiContentScroll'), contentScroller;
+  var $scroll = $('#uiContentScroll'), contentScroller = null;
   function changeDetailContent(index) {
     var data = DATA_REPORT_2017.items[index];
     if(!data) return;

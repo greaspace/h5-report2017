@@ -255,7 +255,7 @@ body {
     p {
       display: none;
     }
-    p:first-child {
+    p:first-child, p:nth-child(2) {
       display: block;
     }
 
