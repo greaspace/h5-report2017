@@ -8,7 +8,7 @@ git checkout gh-pages
 git pull origin gh-pages
 
 cd dist
-rm -rf $(ls dist | grep -v fonts)
+rm -rf $(ls | grep -v fonts)
 cd ..
 
 cp -R ../dist ./
