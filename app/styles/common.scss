@@ -32,3 +32,20 @@ html, body, .wrapper, .ui-page, .ui-scroll, .ui-full {
   text-align: center;
   bottom: 10px;
 }
+
+.ui-wechat {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.8;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  text-align: right;
+  display: none;
+
+  img {
+    width: 50%;
+  }
+}

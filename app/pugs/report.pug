@@ -1,6 +1,8 @@
 doctype html
 html
   head
+    div#wx_pic(style="margin:0 auto;display:none;")
+      img(src="./src/image/data/pic300.jpg")
     include partials/meta
     title 政府工作报告 - 中国网
     include partials/styles
@@ -18,6 +20,7 @@ html
       // detail page
       include report/detail
 
+    include common/wechat
     include partials/scripts
     // build:js scripts/report.js
     script(src="scripts/report-data.js")

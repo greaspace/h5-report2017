@@ -87,11 +87,15 @@ body {
 }
 
 .ui-navs-wrapper {
-  width: 260px;
-  margin: 15px auto 0;
-  height: 270px;
-  overflow: hidden;
-  position:relative;
+  //width: 260px;
+  //margin: 15px auto 0;
+  //height: 270px;
+  //overflow: hidden;
+  //position:relative;
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  margin-left: -130px;
 
   .ui-navs {
     text-align: center;
@@ -160,6 +164,21 @@ body {
 .ui-player {
   width: 100%;
   min-height: 20px;
+  position: relative;
+
+  .ui-video-play {
+    position: absolute;
+    background: url("../images/video-play.png") no-repeat;
+    background-size: cover;
+    width: 107px;
+    height: 83px;
+    z-index: 999;
+    content: '\20';
+    left: 50%;
+    top: 50%;
+    margin-left: -53.5px;
+    margin-top: -41.5px;
+  }
 }
 
 @keyframes amToggleAsideOpen {
@@ -233,9 +252,11 @@ body {
   }
 
   &.off {
-    .ct-collapse {
-      max-height: 110px;
-      overflow: hidden;
+    p {
+      display: none;
+    }
+    p:first-child {
+      display: block;
     }
 
     .ct-collapse-toggle {
@@ -273,5 +294,17 @@ body {
         margin-right: 10px;
       }
     }
+  }
+}
+.ui-shares {
+  padding-bottom: 15px;
+  .btn-back {
+    background-color: $btnTextGrey;
+    color: #ffffff;
+  }
+  .btn-share {
+    background-color: $btnTextRed;
+    color: #ffffff;
+    margin-left: 40px;
   }
 }

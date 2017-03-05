@@ -145,9 +145,13 @@ $(function () {
   });
 
   var $player = $('#uiPlayer');
-  $player.delegate('img', 'touchstart', function(){
-    $('#uiPlayer').jPlayer('play');
-  });
+  $('#uiPlayer').delegate('img', 'touchstart', playVideo);
+  $('#uiPlayer').delegate('video', 'touchstart', playVideo);
+  $('.ui-video-play').on('touchstart', playVideo);
+  function playVideo(){
+    $('.ui-video-play').hide();
+    $player.jPlayer('play');
+  }
 
   var $scroll = $('#uiContentScroll'), contentScroller;
   function changeDetailContent(index) {
@@ -203,4 +207,20 @@ $(function () {
     });
     // contentScroller && contentScroller.refresh();
   }
+
+  // back && share
+  $('.btn-back').on('touchstart', function () {
+    $detailPage.addClass('zoomOut');
+    $homePage.show(function () {
+      $detailPage.hide().removeClass('zoomOut');
+    }).addClass('fadeIn');
+  });
+
+  $('.btn-share').on('touchstart', function(){
+    $('.ui-wechat').show();
+  });
+
+  $('.ui-wechat').on('touchstart', function(){
+    $(this).hide();
+  });
 });

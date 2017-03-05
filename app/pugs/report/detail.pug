@@ -16,14 +16,18 @@
       .ui-bd
         .ui-scroll#uiContentScroll
           .ui-scroll-inner
-            .ui-player#uiPlayer(style="width: 320px; height:200px")
+            .ui-player
+              #uiPlayer(style="width: 320px; height:200px")
+              .ui-video-play
             .ui-abstract#detailAbscract
               .ui-abstract-inner
               .ui-banner
                 img(src="./images/banner.png" width="100%")
 
             .ui-content
-
+            .ui-shares.text-center
+              button.btn.btn-sm.btn-back 返回首页
+              button.btn.btn-sm.btn-share 我要分享
 
       #detailAside.ui-aside
         ul.ui-menus.list-unstyled
