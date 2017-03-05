@@ -3,6 +3,7 @@
 gulp
 rm -rf ../dist
 mv dist ../
+gulp clean
 
 git checkout gh-pages
 rm -rf $(ls dist | grep -v fonts)
