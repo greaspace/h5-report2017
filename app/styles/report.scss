@@ -89,7 +89,7 @@ body {
 .ui-navs-wrapper {
   width: 260px;
   margin: 15px auto 0;
-  height: 360px;
+  height: 270px;
   overflow: hidden;
   position:relative;
 
@@ -148,9 +148,12 @@ body {
 
   & + .ui-bd {
     top: 44px;
-    background-color: #f7f7f7;
     transform-style: preserve-3d;
     transform-origin: 0 0 0;
+
+    .ui-scroll-inner {
+      background-color: #f7f7f7;
+    }
   }
 }
 

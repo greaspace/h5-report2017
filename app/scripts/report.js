@@ -1,5 +1,6 @@
 $(function () {
   var EVENT_ANIMATION_END = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+  var EVENT_SINGLE_TOUCH = 'tap';
 
   // loading page
   var $loadingPage = $('#loadingPage');
@@ -31,22 +32,22 @@ $(function () {
   // main page
   var $homePage = $('#homePage');
   var $homeNavigation = $('.ui-navs', $homePage);
-  $homeNavigation.delegate('li', 'click', function (e) {
+  $homeNavigation.delegate('li', EVENT_SINGLE_TOUCH, function (e) {
     var $this = $(this), index = $this.data('index');
     changeDetailContent(index);
     $homePage.hide();
+    $detailPage.show(function(){
+      new IScroll($scroll[0], { tap: true })
+    });
+
     $asideNavigation.find('li')
       .removeClass('active')
       .filter('[data-index='+index+']')
       .addClass('active');
-    $detailPage.show(function(){
-      // $('.ui-hd', this).addClass('slideInDown');
-      // $('.ui-bd', this).addClass('zoomIn');
-    });
-
   });
   $homePage.one('shown', function () {
-    !$('li', $homeNavigation).length && $.each(DATA_REPORT_2017.navs, function (i, item) {
+    if($('li', $homeNavigation).length) return;
+    $.each(DATA_REPORT_2017.navs, function (i, item) {
       var nav = item.split(' ');
       $('<li>').attr('data-index', i)
         .append($('<b>').text(nav[0]))
@@ -57,6 +58,7 @@ $(function () {
         .append($('<span>').text(nav[1]))
         .appendTo($homeNavigation);
     });
+    new IScroll('.ui-navs-wrapper', { tap: true });
   });
 
   // article page
@@ -66,7 +68,7 @@ $(function () {
     $detailBody = $('.ui-bd', $detailPage);
 
   // aside toggle
-  $asideToggle.on('click', function (e) {
+  $asideToggle.on(EVENT_SINGLE_TOUCH, function (e) {
     var current = $(this).hasClass('on');
     $asideToggle.toggleClass('on', !current);
 
@@ -97,7 +99,7 @@ $(function () {
 
   // navigation
   var $asideNavigation = $('.ui-menus', $detailPage);
-  $asideNavigation.delegate('li', 'click', function () {
+  $asideNavigation.delegate('li', EVENT_SINGLE_TOUCH, function () {
     if($(this).is('.active')) return;
 
     $(this).addClass('active').siblings().removeClass('active');
@@ -126,7 +128,7 @@ $(function () {
 
   var $title = $('.ui-module-title', $detailPage);
   var $content = $('.ui-content', $detailPage);
-  $content.delegate('.ct-collapse-toggle', 'click', function (e) {
+  $content.delegate('.ct-collapse-toggle', EVENT_SINGLE_TOUCH, function (e) {
     e.preventDefault();
     $(this).parent('.ct-section').toggleClass('off');
   });
@@ -150,8 +152,6 @@ $(function () {
       });
       section.appendTo($content);
     });
-
-    new IScroll($scroll[0]);
   }
 
 });
