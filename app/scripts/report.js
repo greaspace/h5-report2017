@@ -155,3 +155,9 @@ $(function () {
   }
 
 });
+
+$(function () {
+  $(document).on('WeixinJSBridgeReady', function(){
+    alert('1');
+  })
+});
