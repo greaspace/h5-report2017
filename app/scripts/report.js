@@ -158,6 +158,19 @@ $(function () {
 
 $(function () {
   $(document).on('WeixinJSBridgeReady', function(){
-    alert('1');
+    // 发送给好友
+    WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+      WeixinJSBridge.invoke('sendAppMessage', {
+        "appid": "123",
+        "img_url": "http://bcs.duapp.com/api100/image/logo/lover.jpg",
+        "img_width": "160",
+        "img_height": "160",
+        "link": "https://greaspace.github.io/h5-report2017/dist/report.html",
+        "desc":  "中国网出品",
+        "title": "2017政府工作报告 - 中国网"
+      }, function (res) {
+        _report('send_msg', res.err_msg);
+      })
+    });
   })
 });
