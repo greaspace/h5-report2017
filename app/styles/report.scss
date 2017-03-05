@@ -215,27 +215,25 @@ body {
   }
 }
 
-.ui-content {
-  .ct-section {
-    padding: 10px 15px;
-    background-color: #ffffff;
-    margin-bottom: 10px;
+.ct-section {
+  padding: 10px 15px;
+  background-color: #ffffff;
+  margin-bottom: 10px;
 
-    .ct-collapse-toggle {
-      height: 41px;
-      background: url("../images/btn-close.png") center center no-repeat;
-      background-size: auto 50%;
+  .ct-collapse-toggle {
+    height: 41px;
+    background: url("../images/btn-close.png") center center no-repeat;
+    background-size: auto 50%;
+  }
+
+  &.off {
+    .ct-collapse {
+      max-height: 110px;
+      overflow: hidden;
     }
 
-    &.off {
-      .ct-collapse {
-        max-height: 110px;
-        overflow: hidden;
-      }
-
-      .ct-collapse-toggle {
-        background-image: url("../images/btn-expand.png");
-      }
+    .ct-collapse-toggle {
+      background-image: url("../images/btn-expand.png");
     }
   }
   .ct-title {
