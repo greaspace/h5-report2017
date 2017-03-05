@@ -37,7 +37,11 @@ $(function () {
     changeDetailContent(index);
     $homePage.hide();
     $detailPage.show(function(){
-      new IScroll($scroll[0], { tap: true })
+      // +++ scroll bar
+
+      contentScroller = new IScroll($scroll[0], {
+        tap: true
+      });
     });
 
     $asideNavigation.find('li')
@@ -60,7 +64,7 @@ $(function () {
     new IScroll('.ui-navs-wrapper', { tap: true });
   });
 
-  // article page
+  // detail page
   var $detailPage = $('#detailPage'),
     $detailAside = $('#detailAside'),
     $asideToggle = $('.ui-aside-toggle', $detailPage),
@@ -130,9 +134,12 @@ $(function () {
   var $abstractInner = $abstract.find('.ui-abstract-inner');
 
   var $content = $('.ui-content', $detailPage);
+
+  // 展开/折叠内容
   $content.delegate('.ct-collapse-toggle', EVENT_SINGLE_TOUCH, function (e) {
     e.preventDefault();
     $(this).parent('.ct-section').toggleClass('off');
+    contentScroller.refresh();
   });
 
   var $player = $('#uiPlayer');
@@ -140,7 +147,7 @@ $(function () {
     $('#uiPlayer').jPlayer('play');
   });
 
-  var $scroll = $('#uiContentScroll');
+  var $scroll = $('#uiContentScroll'), contentScroller;
   function changeDetailContent(index) {
     var data = DATA_REPORT_2017.items[index];
     if(!data) return;
@@ -191,5 +198,6 @@ $(function () {
       });
       section.appendTo($content);
     });
+    contentScroller && contentScroller.refresh();
   }
 });
