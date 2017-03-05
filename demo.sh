@@ -1,6 +1,6 @@
 #!/bin/bash
 
-gulp
+#gulp
 rm -rf ../dist
 mv dist ../
 
