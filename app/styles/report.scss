@@ -157,6 +157,11 @@ body {
   }
 }
 
+.ui-player {
+  width: 100%;
+  min-height: 20px;
+}
+
 @keyframes amToggleAsideOpen {
   from { transform: rotateZ(0deg); }
   to { transform: rotateZ(360deg); }

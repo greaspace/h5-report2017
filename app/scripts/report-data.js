@@ -5,6 +5,10 @@ var DATA_REPORT_2017 = {
   items: [{
     title: '简政放权',
     subtitle: '推进政府职能转变',
+    video: {
+      src: 'http://mp4.china.com.cn/video_tide/video/2017/3/5/2017351488702201463_430_3.mp4',
+      poster: './images/video/jzfq.jpg'
+    },
     abstracts: [
       {
         h: '除烦苛之弊、施公平之策、开便利之门',
@@ -51,6 +55,10 @@ var DATA_REPORT_2017 = {
   }, {
     title: '反腐倡廉',
     subtitle: '打铁还需自身强硬',
+    video: {
+      src: 'http://mp4.china.com.cn/video_tide/video/2017/3/5/2017351488702079628_430_3.mp4',
+      poster: './images/video/ffcl.jpg'
+    },
     abstracts: [
       {
         h: '反腐败斗争形成压倒性态势',
@@ -95,6 +103,10 @@ var DATA_REPORT_2017 = {
   }, {
     title: '经济发展',
     subtitle: '缓中趋稳稳中向好',
+    video: {
+      src: 'http://mp4.china.com.cn/video_tide/video/2017/3/5/2017351488702215566_430_3.mp4',
+      poster: './images/video/jjfz.jpg'
+    },
     abstracts: [
       {
         h: '经济运行缓中趋稳、稳中向好。',
@@ -150,6 +162,10 @@ var DATA_REPORT_2017 = {
   }, {
     title: '污染治理',
     subtitle: '打好蓝天保卫战',
+    video: {
+      src: 'http://mp4.china.com.cn/video_tide/video/2017/3/5/2017351488702143554_430_3.mp4',
+      poster: './images/video/hjzl.jpg'
+    },
     abstracts: [
       {
         h: '加强生态文明建设，绿色发展取得新进展',
@@ -208,6 +224,10 @@ var DATA_REPORT_2017 = {
   }, {
     title: '改善民生',
     subtitle: '人民获得感增强',
+    video: {
+      src: 'http://mp4.china.com.cn/video_tide/video/2017/3/5/2017351488702116911_430_3.mp4',
+      poster: './images/video/gsms.jpg'
+    },
     abstracts: [
       {
         h: '确保零就业家庭至少有一人稳定就业',
@@ -310,6 +330,10 @@ var DATA_REPORT_2017 = {
   }, {
     title: '脱贫攻坚',
     subtitle: '精补短板 发展农业',
+    video: {
+      src: 'http://mp4.china.com.cn/video_tide/video/2017/3/5/2017351488702236300_430_3.mp4',
+      poster: './images/video/tpgj.jpg'
+    },
     abstracts: [
       {
         h: '确保脱贫经得起历史检验',
@@ -381,6 +405,10 @@ var DATA_REPORT_2017 = {
   }, {
     title: '一带一路',
     subtitle: '一批重大项目落地',
+    video: {
+      src: 'http://mp4.china.com.cn/video_tide/video/2017/3/5/2017351488702249322_430_3.mp4',
+      poster: './images/video/ydyl.jpg'
+    },
     abstracts: [
       {
         h: '一批重大项目落地 加强战略对接',
@@ -422,6 +450,10 @@ var DATA_REPORT_2017 = {
   }, {
     title: '城镇化',
     subtitle: '户籍改革 城镇建设',
+    video: {
+      src: 'http://mp4.china.com.cn/video_tide/video/2017/3/5/2017351488702066705_430_3.mp4',
+      poster: './images/video/czh.jpg'
+    },
     abstracts: [
       {
         h: '深化户籍制度改革 支持中小城市和特色小城镇发展',

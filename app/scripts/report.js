@@ -98,7 +98,7 @@ $(function () {
 
   // navigation
   var $asideNavigation = $('.ui-menus', $detailPage);
-  $asideNavigation.delegate('li', EVENT_SINGLE_TOUCH, function () {
+  $asideNavigation.delegate('li', 'touchstart', function () {
     if($(this).is('.active')) return;
 
     $(this).addClass('active').siblings().removeClass('active');
@@ -128,10 +128,16 @@ $(function () {
   var $title = $('.ui-module-title', $detailPage);
   var $abstract = $('#detailAbscract', $detailPage);
   var $abstractInner = $abstract.find('.ui-abstract-inner');
+
   var $content = $('.ui-content', $detailPage);
   $content.delegate('.ct-collapse-toggle', EVENT_SINGLE_TOUCH, function (e) {
     e.preventDefault();
     $(this).parent('.ct-section').toggleClass('off');
+  });
+
+  var $player = $('#uiPlayer');
+  $player.delegate('img', 'touchstart', function(){
+    $('#uiPlayer').jPlayer('play');
   });
 
   var $scroll = $('#uiContentScroll');
@@ -141,6 +147,25 @@ $(function () {
 
     // set title
     $title.text(data.title);
+
+    // reset media
+    $player.jPlayer({
+      ready: onPlayerReady,
+      supplied: 'm4v',
+      size: {
+        width: '100%',
+        height: '100%',
+        cssClass: 'ui-video-player'
+      }
+    });
+
+    function onPlayerReady() {
+      var $this = $(this);
+      $this.jPlayer('setMedia', {
+        m4v: data.video.src,
+        poster: data.video.poster
+      });
+    }
 
     // reset abstract
     $abstractInner.empty();
@@ -167,5 +192,4 @@ $(function () {
       section.appendTo($content);
     });
   }
-
 });

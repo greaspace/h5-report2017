@@ -6,7 +6,8 @@
     "bootstrap": "^3.3.7",
     "animate.css": "^3.5.2",
     "snabbt.js": "^0.6.4",
-    "iscroll": "^5.2.0"
+    "iscroll": "^5.2.0",
+    "jPlayer": "jplayer#^2.9.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
