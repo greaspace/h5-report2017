@@ -63,7 +63,9 @@ $(function () {
         .append($('<span>').text(item.subtitle))
         .appendTo($homeNavigation);
     });
-    new IScroll('.ui-navs-wrapper', { tap: true, scrollbars: true });
+    new IScroll('.ui-navs-wrapper', {
+      tap: true
+    });
   });
 
   // detail page
@@ -205,7 +207,7 @@ $(function () {
       });
       section.appendTo($content);
     });
-    // contentScroller && contentScroller.refresh();
+    contentScroller && contentScroller.scrollTo(0, 0);
   }
 
   // back && share

@@ -87,15 +87,15 @@ body {
 }
 
 .ui-navs-wrapper {
-  //width: 260px;
-  //margin: 15px auto 0;
-  //height: 270px;
-  //overflow: hidden;
-  //position:relative;
-  position: absolute;
-  top: 120px;
-  left: 50%;
-  margin-left: -130px;
+  width: 260px;
+  margin: 15px auto 0;
+  min-height: 270px;
+  overflow: hidden;
+  position: relative;
+  //position: absolute;
+  //top: 120px;
+  //left: 50%;
+  //margin-left: -130px;
 
   .ui-navs {
     text-align: center;
