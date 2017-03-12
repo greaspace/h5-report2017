@@ -15,7 +15,7 @@
 
 $(function () {
   var EVENT_ANIMATION_END = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-  var loading, home, game, answer;
+  var loading, home, game, answer, resultPage;
 
   // loading page
   loading = $('#loadingPage');
@@ -84,26 +84,34 @@ $(function () {
       var result = $this.data('answer');
       if(answered == result){
         $this.addClass('success');
+        go();
       } else {
         $this.addClass('fail');
 
         var sto = setTimeout(function () {
           var answers = result.split('');
-          $this.removeClass('fail');
+          $forms.empty();
+          $this.removeClass('fail').addClass('success');
           $.each(answers, inputAnswer);
-          $this.addClass('success');
+          go();
 
           clearTimeout(sto);
-        }, 200);
+        }, 1000);
       }
+    }
 
-      redirect(function(){
-        game.hide();
-        $('#answerPage').show();
-      }, function(){
-        answered = '';
-        selected = [];
-      });
+    function go() {
+      var sto = setTimeout(function(){
+        redirect(function(){
+          game.hide();
+          resultPage.show();
+        }, function(){
+          answered = '';
+          selected = [];
+        });
+
+        clearTimeout(sto);
+      }, 1000);
     }
 
     function inputAnswer(index, answer){
@@ -174,4 +182,8 @@ $(function () {
     io = io || 'In';
     return type + io + direction;
   }
+
+  // result page
+  resultPage = $('#resultPage');
+
 });

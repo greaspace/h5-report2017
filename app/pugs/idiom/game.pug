@@ -1,15 +1,16 @@
 //
    Created by Grea on 2017/3/2.
 
-#gamePage.ui-page.animated
+#gamePage.ui-page.animated.hidden
   .ui-scroll
     .ui-scroll-inner
       .ui-bd
         .ui-idiom-game
           .idiom-game-image
-            img.img-circle(src="http://mat1.gtimg.com/news/2015/xidada/luoyang.png")
+            .idiom-game-image-inner
+              img.img-circle(src="http://mat1.gtimg.com/news/2015/xidada/luoyang.png")
           .idiom-game-input
-            .idiom-game-answer(data-answer="大刀阔斧")
+            .idiom-game-answer.fail(data-answer="大刀阔斧")
               dl.idiom-game-form.clearfix
                 dd
                 dd

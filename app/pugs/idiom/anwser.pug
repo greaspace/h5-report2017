@@ -3,23 +3,106 @@
 
 #answerPage.ui-page.animated
   .ui-scroll
-    .ui-scroll-inner
-      .ui-hd
-        div.ui-answer-title.text-center
-          span 总理的角色
-          h1 先行者
-        div.ui-answer-subject
-          p 概述概述概述概述概述，概述概述概述概述概述概述，概述概述概述概述概述概述概述。
+    .ui-scroll-inner.ui-daiyan.hidden
+      .ui-hd.text-center
+        img(src="./images/idiom/answer-daoshi-title.png")
       .ui-bd
-        .ui-answer-bd-background
-        .ui-answer-bd.ui-answer-3
-          - for (var x = 0; x < 3; x++)
-            .ui-answer-item.animated(class="answer-item-" + x)
-              .answer-item-image
-                img(src="http://mat1.gtimg.com/news/2015/xidada/7.png" width="87" height="64")
-              p.answer-item-text
-                | 概述概述概述概述概述，概述概述概述概
+        .container
+          .text-center.ui-answer-desc
+            img(src="./images/idiom/answer-daiyan-desc.png")
+        .ui-daiyan-content
+          - for (var i=1; i<4; i++)
+            img.item.time(src="./images/idiom/answer-daiyan-time-"+i+".png" class="time-"+i)
+            img.item.photo(src="./images/idiom/answer-daiyan-photo-"+i+".png" class="photo-"+i)
+          div.item.desc.desc-1
+            | 李克强总理作政府工作报告时首次提出
+            b "工匠精神"
+            | 。
+          div.item.desc.desc-2
+            | 总理将
+            b "工匠精神"
+            | 与个人、企业和政务结合，总计
+            b 16
+            | 次提及
+            b "工匠精神"
+            | 。
+          div.item.desc.desc-3
+            | 《咬文嚼字》杂志发布了"2016年十大流行语"，
+            b "工匠精神"
+            | 入选。
+      .ui-ft.clearfix.text-center
+        a.ui-btn.ui-btn-next
 
-      .ui-ft.clearfix
-        p.text-center
-          button.btn-next.btn.btn-sm.btn-success 下一题
+    .ui-scroll-inner.ui-shigan.hidden
+      .ui-hd.text-center
+        img(src="./images/idiom/answer-shigan-title.png")
+      .ui-bd
+        .container
+          .text-center.ui-answer-desc
+            img(src="./images/idiom/answer-shigan-desc.png")
+        .ui-shigan-content
+          img.item.center(src="./images/idiom/answer-shigan-center.png")
+          - for (var i=1; i<5; i++)
+            img.item.number(src="./images/idiom/shigan/p2_sup_"+i+".png" class="number-" + i)
+            img.item.desc(src="./images/idiom/shigan/p2_sub_"+i+".png" class="desc-" + i)
+      .ui-ft.clearfix.text-center
+        a.ui-btn.ui-btn-next
+
+    .ui-scroll-inner.ui-gongpu.hidden
+      .ui-hd.text-center
+        img(src="./images/idiom/answer-gongpu-title.png")
+      .ui-bd.ui-gongpu.hidden
+        .container
+          .text-center.ui-answer-desc
+            img(src="./images/idiom/gongpu/p3_font.png")
+        .ui-gongpu-content
+          .item.time-line
+          - for (var i=1; i<5; i++)
+            img.item(src="./images/idiom/gongpu/p3_sub_"+i+".png" class="item-"+i)
+      .ui-ft.clearfix.text-center
+        a.ui-btn.ui-btn-next
+
+    .ui-scroll-inner.ui-feiren.hidden
+      .ui-hd.text-center
+        img(src="./images/idiom/answer-feiren-title.png")
+      .ui-hd.text-center
+        img(src="./images/idiom/answer-feiren-title.png")
+      .ui-bd
+        .container
+          .text-center.ui-answer-desc
+            img(src="./images/idiom/answer-feiren-desc.png")
+        .ui-feiren-content
+          .item.time-line
+          - for (var i=1; i<5; i++)
+            img.item.time(src="./images/idiom/feiren/time-"+i+".png" class="time-"+i)
+            img.item.desc(src="./images/idiom/feiren/desc-"+i+".png" class="desc-"+i)
+      .ui-ft.clearfix.text-center
+        a.ui-btn.ui-btn-next
+
+    .ui-scroll-inner.ui-tuixiao
+      .ui-hd.text-center
+        img(src="./images/idiom/answer-tuixiao-title.png")
+      .ui-bd
+        .container
+          .text-center.ui-answer-desc
+            img(src="./images/idiom/answer-tuixiao-desc.png")
+        .ui-tuixiao-centent
+      .ui-ft.clearfix.text-center
+        a.ui-btn.ui-btn-next
+          img(src="./images/idiom/btn-next.png")
+
+    .ui-scroll-inner.ui-daoshi.hidden
+      .ui-hd.text-center
+        img(src="./images/idiom/answer-daoshi-title.png")
+      .ui-bd
+        .container
+          .text-center.ui-answer-desc
+            img(src="./images/idiom/answer-daoshi-desc.png")
+        .ui-daoshi-centent
+          img.item.decoration(src="./images/idiom/daoshi/decoration.png")
+          - for (var i=1; i<5; i++)
+            img.item.number(src="./images/idiom/daoshi/number-" + i + ".png" class="number-" + i)
+            img.item.desc(src="./images/idiom/daoshi/desc-" + i + ".png" class="desc-" + i)
+      .ui-ft.clearfix.text-center
+        a.ui-btn.ui-btn-like
+        a.ui-btn.ui-btn-score

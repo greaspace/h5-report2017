@@ -1,9 +1,50 @@
 @import "common";
 
+// colors
+$bgDefault: #fefefc;
+$textBlack: #3a3a3a;
+$textRed: #c01920;
+
 body {
-  background: url("../images/idiom-background.jpg") left top no-repeat;
+  background: url("../images/idiom/background.png") center bottom no-repeat;
   background-size: cover;
-  color: #ffffff;
+  color: $textBlack;
+}
+
+// redirect page
+@keyframes amRedirectGateClose {
+  from { width: 1000px; height: 1000px; margin-left: -1500px; margin-top: -1500px;}
+  to { width: 0px; height: 0px; margin-left: -1000px; margin-top: -1000px;}
+}
+@keyframes amRedirectGateOpen {
+  from { width: 0px; height: 0px; margin-left: -1000px; margin-top: -1000px;}
+  to { width: 1000px; height: 1000px; margin-left: -1500px; margin-top: -1500px;}
+}
+#redirect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  display: none;
+
+  .ui-redirect-gate {
+    position: absolute;
+    border: 1000px solid #ffff99;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    box-sizing: content-box;
+    width: 1000px; height: 1000px; margin-left: -1500px; margin-top: -1500px;
+  }
+
+  .redirect-animation-close {
+    animation: amRedirectGateClose 1000ms linear;
+  }
+  .redirect-animation-open {
+    animation: amRedirectGateOpen 200ms linear;
+  }
 }
 
 // loading page
@@ -26,49 +67,60 @@ $loadingWrightLeft: 8px;
   90% { left: amWritingLeft(20px); bottom: 44px; }
 }
 
-.ui-loading-page {}
+#loadingPage {
+  background: url("../images/idiom/loading-background.png") center bottom no-repeat;
+  background-size: cover;
+}
 .ui-loading {
-  padding-top: 80px;
+  padding-top: 20%;
 
   .ui-loading-progress {
     position: relative;
-    height: 150px;
-    width: 80px;
+    width: 150px;
     margin: 0 auto 15px;
 
-    .ui-loading-writing, .ui-loading-maobi, .ui-loading-percent {
-      position: absolute;
-    }
-
-    .ui-loading-maobi {
-      width: 80px;
-      left: 35px;
-      bottom: 48px;
-      animation: amWriting 1s linear infinite;
-    }
-
-    .ui-loading-writing {
-      width: 60px;
-      bottom: 0;
-      left: $loadingWrightLeft;
-    }
-    .ui-loading-percent {
-      bottom: 18px;
-      display: block;
-      text-align: center;
+    img {
       width: 100%;
     }
-  }
 
-  .ui-loading-text {
+    //.ui-loading-writing, .ui-loading-maobi {
+    //  position: absolute;
+    //}
+    //
+    //.ui-loading-maobi {
+    //  width: 80px;
+    //  left: 35px;
+    //  bottom: 48px;
+    //  animation: amWriting 1s linear infinite;
+    //}
+    //
+    //.ui-loading-writing {
+    //  width: 60px;
+    //  bottom: 0;
+    //  left: $loadingWrightLeft;
+    //}
+  }
+}
+.ui-loading-percent {
+  color: $textRed;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.ui-bottom-logo {
+  width: 70%;
+  margin: 0 auto 10%;
+
+  img {
+    width: 100%;
   }
 }
 
 // home page
 
 #homePage {
-  background: url("../images/idiom-home-background.png") bottom center no-repeat;
-  background-size: 576px 234px;
+  background: url("../images/idiom/home-background.png") center bottom no-repeat;
+  background-size: cover;
 }
 
 @keyframes amWelcomeGame {
@@ -124,12 +176,19 @@ $loadingWrightLeft: 8px;
 
 // game page
 .idiom-game-image {
-  width: 50%;
+  width: 70%;
   margin: 0 auto;
-  padding-top: 60px;
+  padding-top: 8%;
 
+  .idiom-game-image-inner {
+    padding: 20px 23px 28px 25px;
+    background: url("../images/idiom/game-image-inner.png") center bottom no-repeat;
+    background-size: cover;
+  }
   img {
     width: 100%;
+    padding: 10px;
+    background-color: #FFFFFF;
   }
 }
 .idiom-game-input {
@@ -137,12 +196,16 @@ $loadingWrightLeft: 8px;
   font-size: 24px;
   text-align: center;
 }
+
+$answerDefault: #ffe38f;
+$answerFail: #a3dcfa;
 .idiom-game-answer {
   position: relative;
   top: 60px;
   width: 240px;
   left: 50%;
   margin-left: -120px;
+  color: $answerDefault;
 
   .idiom-game-form {
     display: flex;
@@ -150,10 +213,10 @@ $loadingWrightLeft: 8px;
     dd {
       width: 60px;
       height: 60px;
-      background-color: #ffffff;
+      background-color: #c01a1f;
       flex: 1;
       margin-left: -1px;
-      border-left: 1px solid #ededed;
+      border-left: .1px solid #de847f;
       line-height: 60px;
 
       &:first-child {
@@ -184,22 +247,25 @@ $loadingWrightLeft: 8px;
   }
 
   &.fail {
-    color: #ee3333;
+    color: $answerFail;
 
     .idiom-game-answer-tip .glyphicon-remove-sign{
+      color: #d74646;
       display: inline-block;
     }
   }
 
   &.success {
-    color: #339933;
+    color: $answerDefault;
 
     .idiom-game-answer-tip .glyphicon-ok-sign{
+      color: #19fb28;
       display: inline-block;
     }
   }
 }
 
+$controlColor: #dc4f53;
 .idiom-game-control {
   position: relative;
   top: 60px;
@@ -214,16 +280,18 @@ $loadingWrightLeft: 8px;
       width: 44px;
       height: 44px;
       margin: 0 5px 5px 0;
-      background-color: #ffffff;
       border-radius: 3px;
       line-height: 43px;
+      color: $controlColor;
+      border: 2px solid $controlColor;
 
       &:nth-child(5n){
         margin-right: 0;
       }
 
       &.selected {
-        background-color: #ffff99;
+        background-color: $controlColor;
+        color: #FFFFFF;
       }
     }
   }
@@ -233,19 +301,68 @@ $loadingWrightLeft: 8px;
   50% { opacity: 0.1; }
 }
 .ui-game-tip {
-  color: yellow;
   animation: amGameTip 2s linear infinite;
 }
 
 // answer page
 #answerPage {
+  background: url("../images/idiom/answer-background.png") center top no-repeat;
+  background-size: 100% auto;
+
   .ui-hd {
-    padding-top: 20px;
+    padding-top: 5%;
+    height: 8.5%;
+
+    img {
+      height: 100%;
+    }
   }
   .ui-bd {
-    top: 100px;
+    top: 12%;
+
+    .ui-answer-desc img {
+      width: 100%;
+    }
+
+    .item {
+      position: absolute;
+    }
+  }
+
+  .ui-ft {
+    //bottom: 0;
+
+    .ui-btn{
+      display: inline-block;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .ui-btn-like, .ui-btn-score, .ui-btn-next {
+      width: 128px;
+      height: 41px;
+    }
+
+    .ui-btn-next {
+      background: url(../images/idiom/btn-next.png) center top no-repeat;
+      background-size: 100% auto;
+    }
+
+    .ui-btn-like {
+      background: url(../images/idiom/daoshi/btn-like.png) center top no-repeat;
+      background-size: 100% auto;
+    }
+
+    .ui-btn-score {
+      background: url(../images/idiom/daoshi/btn-score.png) center top no-repeat;
+      background-size: 110% auto;
+      background-position: -5px 0px;
+    }
   }
 }
+
 .ui-answer-title {
   position: relative;
   width: 160px;
@@ -261,101 +378,204 @@ $loadingWrightLeft: 8px;
     margin: 0;
   }
 }
-.ui-answer-title::after {
-  border-bottom: 2px solid #ffff99;
-  display: block;
-  width: 280px;
-  content: '\20';
+
+.ui-daiyan-content {
+  background: url("../images/idiom/answer-daiyan-timeline.png") center top no-repeat;
+  background-size: 90% auto;
   position: absolute;
-  left: -60px;
-  top: 35px;
-  z-index: -1;
-}
-.ui-answer-subject {
-  position: relative;
-  width: 280px;
-  margin: 0 auto;
-  color: #ffff99;
-}
+  top: 12%; bottom: 0; left: 15px; right: 15px;
 
-@keyframes amAnswerBackground {
-  from { transform: rotateZ(0deg); }
-  to { transform: rotateZ(7deg); }
-}
-
-@function answerItemPosition($index, $count) {
-
-}
-.ui-answer-bd-background, .ui-answer-bd {
-  width: 200px;
-  height: 200px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -100px;
-  margin-top: -150px;
-}
-.ui-answer-bd-background {
-  border: 2px dashed #ffff99;
-  border-radius: 50%;
-  animation: amAnswerBackground 200ms linear infinite;
-}
-.ui-answer-item {
-  width: 100px;
-  font-size: 12px;
-  position: absolute;
-
-  .answer-item-image {
-    width: 80px;
-    height: 60px;
+  .time {
+    width: 30%;
   }
-}
-.ui-answer-3 {
-  .answer-item-0 {
-    left: -30px;
-    top: 0px;
+  .time-1 {
+    top: 4.8%;
+    left: 2.2%;
   }
-  .answer-item-1 {
-    right: -50px;
-    top: 50px;
+
+  .time-2 {
+    top: 30%;
+    right: 2.2%;
   }
-  .answer-item-2 {
-    left: 50px;
-    top: 150px;
+  .time-3 {
+    top: 55.5%;
+    left: 2.2%;
+  }
+
+  .photo {
+    width: 21%;
+  }
+  .photo-1 {
+    top: 13%;
+    left: 9%;
+  }
+  .photo-2 {
+    top: 38%;
+    right: 9%;
+  }
+  .photo-3 {
+    top: 63%;
+    left: 12%;
+  }
+
+  .desc {
+    width: 60%;
+
+    b {
+      color: red;
+    }
+  }
+  .desc-1 {
+    top: 15%;
+    right: 0;
+  }
+  .desc-2 {
+    top: 38%;
+    left: 0;
+  }
+  .desc-3 {
+    top: 65%;
+    right: 0;
   }
 }
 
-@keyframes amRedirectGateClose {
-  from { width: 1000px; height: 1000px; margin-left: -1500px; margin-top: -1500px;}
-  to { width: 0px; height: 0px; margin-left: -1000px; margin-top: -1000px;}
-}
-@keyframes amRedirectGateOpen {
-  from { width: 0px; height: 0px; margin-left: -1000px; margin-top: -1000px;}
-  to { width: 1000px; height: 1000px; margin-left: -1500px; margin-top: -1500px;}
-}
-#redirect {
+.ui-shigan-content {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  display: none;
+  top: 13%; bottom: 0; left: 15px; right: 15px;
 
-  .ui-redirect-gate {
-    position: absolute;
-    border: 1000px solid #ffff99;
+  .center {
+    width: 33.33%;
+    left: 33.33%; top: 25%;
+    border: 2px solid red;
     border-radius: 50%;
-    left: 50%;
-    top: 50%;
-    box-sizing: content-box;
-    width: 1000px; height: 1000px; margin-left: -1500px; margin-top: -1500px;
   }
 
-  .redirect-animation-close {
-    animation: amRedirectGateClose 1000ms linear;
+  .number {
+    width: 10%;
   }
-  .redirect-animation-open {
-    animation: amRedirectGateOpen 200ms linear;
+  .number-4{
+    left: 27.5%;
+    top: 33%;
   }
+  .number-3{
+    left: 45%;
+    top: 43.5%;
+  }
+  .number-2{
+    left: 60.5%;
+    top: 33%;
+  }
+  .number-1{
+    left: 45%;
+    top: 22.5%;
+  }
+  .desc-4 {
+    left: 5%;
+    top: 30%;
+    width: 30%;
+  }
+  .desc-3 {
+    left: 25%;
+    top: 52%;
+    width: 50%;
+  }
+  .desc-2 {
+    right: 0;
+    top: 28%;
+    width: 25%;
+  }
+  .desc-1 {
+    left: 25%;
+    top: 10%;
+    width: 50%;
+  }
+}
+
+.ui-gongpu-content {
+  background: url("../images/idiom/gongpu/p3_map.png") no-repeat;
+  background-size: 90% auto;
+  background-position: center 10%;
+  position: absolute;
+  top: 13%; bottom: 0; left: 15px; right: 15px;
+
+  .time-line{
+    width: 28px;
+    height: 100%;
+    background: url("../images/idiom/gongpu/p3_progress.png") no-repeat;
+    background-position: center top;
+    background-size: 100% auto;
+    left: 50%;
+    margin-left: -14px;
+  }
+  img.item {
+    width: 45%;
+  }
+
+  .item-1 {
+    top: 10%;
+  }
+  .item-2 {
+    right: 0;
+    top: 20%;
+  }
+  .item-3 {
+    top: 35%;
+  }
+  .item-4 {
+    right: 0;
+    top: 50%;
+  }
+}
+
+.ui-feiren-content {
+  background: url("../images/idiom/feiren/global-map.png") no-repeat;
+  background-size: 90% auto;
+  background-position: center 10%;
+  position: absolute;
+  top: 13%; bottom: 0; left: 15px; right: 15px;
+
+  .time-line{
+    width: 120px;
+    height: 100%;
+    background: url("../images/idiom/feiren/time-line.png") no-repeat;
+    background-position: center top;
+    background-size: 100% auto;
+    left: 50%;
+    margin-left: -60px;
+  }
+
+  .time { width: 100px; }
+  .time-1, .time-3 { right: 48.9%; }
+  .time-2, .time-4 { left: 51.2%; }
+  .time-1 { top: 10%; }
+  .time-2 { top: 30%; }
+  .time-3 { top: 45%; }
+  .time-4 { top: 57%; }
+
+  .desc { width: 50%; }
+  .desc-1, .desc-3 { right: 50%; }
+  .desc-2, .desc-4 { left:  52%; }
+  .desc-1 { top: 17%; }
+  .desc-2 { top: 35%; }
+  .desc-3 { top: 52%; }
+  .desc-4 { top: 62%; }
+}
+
+.ui-daoshi-centent {
+  position: absolute;
+  top: 13%; bottom: 0; left: 15px; right: 15px;
+
+  .decoration { width: 60%; left: 20%; top: 5%; z-index: 15; }
+
+  .number { width: 40px; z-index: 20; }
+  .number-1 { left: 14.5%; top: 0}
+  .number-2 { right: 25%; top: 5%}
+  .number-3 { left: 19%; top: 38%}
+  .number-4 { right: 18%; top: 37%}
+
+  .desc { width: 40%; }
+  .desc-1 { left: 0; top: 3%; z-index: 10;}
+  .desc-2 { right: 8%; top: 7%; z-index: 10;}
+  .desc-3 { left: 5%; top: 40%; z-index: 10;}
+  .desc-4 { right: 3%; top: 44%; z-index: 19;}
 }
