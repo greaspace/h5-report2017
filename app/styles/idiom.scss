@@ -31,7 +31,7 @@ body {
 
   .ui-redirect-gate {
     position: absolute;
-    border: 1000px solid #ffff99;
+    border: 1000px solid #c01a1f;
     border-radius: 50%;
     left: 50%;
     top: 50%;
@@ -117,10 +117,112 @@ $loadingWrightLeft: 8px;
 }
 
 // home page
+@keyframes amBgHighlight {
+  from { transform: rotateZ(0deg) }
+  to { transform: rotateZ(15deg) }
+}
 
 #homePage {
   background: url("../images/idiom/home-background.png") center bottom no-repeat;
   background-size: cover;
+
+  .ui-bd {
+  }
+  .ui-bd-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ui-bd-highlight {
+    background: url("../images/idiom/home/bg-highlight.png") center center no-repeat;
+    background-size: 90% auto;
+
+    animation: amBgHighlight 200ms steps(2) infinite;
+  }
+
+  .ui-bd-tam {
+    background: url("../images/idiom/home/bg-tam.png") center 25% no-repeat;
+    background-size: 100% auto;
+  }
+
+  .ui-bd-finger {
+    position: absolute;
+    left: 42%;
+    top: 20%;
+
+    img {
+      width: 50%;
+    }
+  }
+  .ui-home-title {
+    position: absolute;
+    top: 23%;
+    width: 100%;
+    background: url("../images/idiom/home/bg-lianghui.png") center bottom no-repeat;
+    height: 120px;
+    background-size: 80% auto;
+
+    img {
+      position: absolute;
+
+      &:nth-child(1) {
+        left: 5%;
+        bottom: 15%;
+        width: 30%;
+      }
+      &:nth-child(2) {
+        left: 22%;
+        bottom: 15%;
+        width: 24%;
+      }
+      &:nth-child(3) {
+        left: 34%;
+        bottom: 20%;
+        width: 23%;
+      }
+      &:nth-child(4) {
+        left: 43%;
+        bottom: 25%;
+        width: 30%;
+      }
+      &:nth-child(5) {
+        width: 17%;
+        left: 65%;
+        bottom: 25%;
+      }
+      &:nth-child(6) {
+        left: 70%;
+        width: 28%;
+        bottom: 5%;
+      }
+    }
+  }
+
+  .ui-home-people {
+    width: 30%;
+    position: absolute;
+    left: 30%;
+    top: 45%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .ui-home-play {
+    position: absolute;
+    bottom: 10%;
+    text-align: center;
+    width: 100%;
+
+    .ui-btn-play {
+      display: inline-block;
+      width: 192px; height: 60px;
+      background: url(../images/idiom/home/btn-play.png) left top no-repeat;
+      background-size: 100% auto;
+    }
+  }
 }
 
 @keyframes amWelcomeGame {
@@ -309,6 +411,10 @@ $controlColor: #dc4f53;
   background: url("../images/idiom/answer-background.png") center top no-repeat;
   background-size: 100% auto;
 
+  .ui-scroll-inner {
+    display: none;
+  }
+
   .ui-hd {
     padding-top: 5%;
     height: 8.5%;
@@ -318,10 +424,26 @@ $controlColor: #dc4f53;
     }
   }
   .ui-bd {
-    top: 12%;
+    top: 11%;
 
-    .ui-answer-desc img {
-      width: 100%;
+    .container {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    .ui-answer-desc {
+      color: #7b1712;
+      p {
+        margin-bottom: 5px;
+      }
+      b {
+        color: #ff0c00;
+        font-size: 1.12em;
+      }
+
+      img {
+        width: 100%;
+      }
     }
 
     .item {
@@ -330,8 +452,6 @@ $controlColor: #dc4f53;
   }
 
   .ui-ft {
-    //bottom: 0;
-
     .ui-btn{
       display: inline-block;
 
@@ -380,7 +500,7 @@ $controlColor: #dc4f53;
 }
 
 .ui-daiyan-content {
-  background: url("../images/idiom/answer-daiyan-timeline.png") center top no-repeat;
+  background: url("../images/idiom/daiyan/timeline.png") center top no-repeat;
   background-size: 90% auto;
   position: absolute;
   top: 12%; bottom: 0; left: 15px; right: 15px;
@@ -439,6 +559,12 @@ $controlColor: #dc4f53;
   }
 }
 
+.ui-shigan {
+  .ui-ft{
+    bottom: 40px;
+  }
+}
+
 .ui-shigan-content {
   position: absolute;
   top: 13%; bottom: 0; left: 15px; right: 15px;
@@ -476,7 +602,7 @@ $controlColor: #dc4f53;
   }
   .desc-3 {
     left: 25%;
-    top: 52%;
+    top: 55%;
     width: 50%;
   }
   .desc-2 {
@@ -496,7 +622,7 @@ $controlColor: #dc4f53;
   background-size: 90% auto;
   background-position: center 10%;
   position: absolute;
-  top: 13%; bottom: 0; left: 15px; right: 15px;
+  top: 15%; bottom: 0; left: 15px; right: 15px;
 
   .time-line{
     width: 28px;
@@ -512,18 +638,18 @@ $controlColor: #dc4f53;
   }
 
   .item-1 {
-    top: 10%;
+    top: 9%;
   }
   .item-2 {
     right: 0;
-    top: 20%;
+    top: 24%;
   }
   .item-3 {
-    top: 35%;
+    top: 42%;
   }
   .item-4 {
     right: 0;
-    top: 50%;
+    top: 60%;
   }
 }
 
@@ -578,4 +704,33 @@ $controlColor: #dc4f53;
   .desc-2 { right: 8%; top: 7%; z-index: 10;}
   .desc-3 { left: 5%; top: 40%; z-index: 10;}
   .desc-4 { right: 3%; top: 44%; z-index: 19;}
+}
+
+
+// result page
+
+.ui-result-score {
+  text-align: center;
+  padding: 10% 15px;
+
+  img {
+    width: 80%;
+  }
+}
+.ui-result-awards {
+  img {
+    width: 100%;
+  }
+}
+.ui-btn-replay, .ui-btn-share{
+  width: 128px; height: 41px;
+  display: inline-block;
+}
+.ui-btn-replay {
+  background: url("../images/idiom/result-btn-replay.png") left top no-repeat;
+  background-size: 100% auto;
+}
+.ui-btn-share {
+  background: url("../images/idiom/result-btn-share.png") left top no-repeat;
+  background-size: 110% auto;
 }

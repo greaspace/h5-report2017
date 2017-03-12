@@ -1,16 +1,16 @@
 //
    Created by Grea on 2017/3/2.
 
-#gamePage.ui-page.animated.hidden
+#gamePage.ui-page.animated
   .ui-scroll
     .ui-scroll-inner
       .ui-bd
         .ui-idiom-game
           .idiom-game-image
             .idiom-game-image-inner
-              img.img-circle(src="http://mat1.gtimg.com/news/2015/xidada/luoyang.png")
+              img#gameImage.img-circle
           .idiom-game-input
-            .idiom-game-answer.fail(data-answer="大刀阔斧")
+            .idiom-game-answer#gameAnswer
               dl.idiom-game-form.clearfix
                 dd
                 dd
@@ -19,18 +19,18 @@
               span.idiom-game-answer-tip
                 i.glyphicon.glyphicon-remove-sign
                 i.glyphicon.glyphicon-ok-sign
-            .idiom-game-control
+            .idiom-game-control#gameControl
               dl.idiom-game-words.clearfix
-                dd 大
-                dd 刀
-                dd 阔
-                dd 斧
-                dd 大
-                dd 刀
-                dd 阔
-                dd 斧
-                dd 大
-                dd 刀
+                dd
+                dd
+                dd
+                dd
+                dd
+                dd
+                dd
+                dd
+                dd
+                dd
       .ui-ft.clearfix
         p.text-center.ui-game-tip
           i.glyphicon.glyphicon-info-sign

@@ -5,11 +5,16 @@
   .ui-scroll
     .ui-scroll-inner
       .ui-bd
-        .container.ui-result-score
-
+        .container.ui-result-score.animated.bounceInDown
+          img(src="./images/idiom/result/score-85.png")
         .container.ui-result-awards
+          div.row.awards
+          - for (var i=0; i<6; i++)
+            div.col-xs-4.award
+              img(src="../images/idiom/result/award.png")
       .ui-ft
         p.ui-result-actions
-
+          a.ui-btn.ui-btn-replay
+          a.ui-btn.ui-btn-share
         p.ui-bottom-logo
           img(src="./images/idiom/logo.png")

@@ -4,18 +4,22 @@
 (function ($) {
   $.fn._show = $.fn.show;
   $.fn.show = function(speed, callback) {
-    return this._show(speed, callback).trigger('ui.shown');
+    return this._show(speed, callback).on('ui.shown', stopPropagation).trigger('ui.shown');
   };
 
   $.fn._hide = $.fn.hide;
   $.fn.hide = function (speed, callback) {
-    return this._hide(speed, callback).trigger('ui.hidden');
+    return this._hide(speed, callback).on('ui.hidden', stopPropagation).trigger('ui.hidden');
   };
+
+  function stopPropagation(e) {
+    e.stopPropagation();
+  }
 })(jQuery);
 
 $(function () {
   var EVENT_ANIMATION_END = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-  var loading, home, game, answer, resultPage;
+  var loading, home, game, answer, resultPage, currentIdiom;
 
   // loading page
   loading = $('#loadingPage');
@@ -33,23 +37,18 @@ $(function () {
       }
       $('.ui-loading-percent', loading).text(text);
     }, 100);
-  }).addClass(getRandomAnimation());
+  }).addClass('fadeIn');
 
   // home page
   home = $('#homePage');
   loading.one('load-finished', function () {
-    loading.one(EVENT_ANIMATION_END, function(){
+    loading.on(EVENT_ANIMATION_END, function(e){
+      if(e.originalEvent.animationName !== 'fadeOut') return;
       loading.hide();
-    }).addClass(getRandomAnimation('Out'));
-    home.show(function () {
-      home.addClass(getRandomAnimation());
-    });
-  });
-  $('#play', home).on('click', function () {
-    redirect(function(){
-      home.hide();
-      game.show();
-    });
+      home.show(function () {
+        home.addClass('fadeIn');
+      });
+    }).addClass('fadeOut');
   });
 
   // game page
@@ -104,7 +103,10 @@ $(function () {
       var sto = setTimeout(function(){
         redirect(function(){
           game.hide();
-          resultPage.show();
+          $('#answerPage .ui-scroll-inner').hide();
+          $('#answerPage').show(function(){
+            $(currentIdiom.id, this).show();
+          });
         }, function(){
           answered = '';
           selected = [];
@@ -162,6 +164,30 @@ $(function () {
     });
   });
 
+  $('[data-idiom]').on('click', function(e){
+    var $this = $(this);
+    redirect(function(){
+      $this.closest('.ui-page').hide();
+      resetGameSource($this.data('idiom'), function(){
+        game.show();
+      });
+    });
+  });
+
+  function resetGameSource(key, cb) {
+    var data = DATA_IDIOM[key];
+    currentIdiom = data;
+    $('#gameImage').attr('src', data.image);
+    $('#gameAnswer').data('answer', key);
+
+    var source = data.input.split('').sort();
+    $.each(source, function (i, item) {
+      $($words.get(i)).text(item);
+    });
+
+    cb && cb();
+  }
+
   function redirect(onClose, onOpen) {
     $('#redirect').show(function () {
       $('.ui-redirect-gate').one(EVENT_ANIMATION_END, function () {
@@ -185,5 +211,65 @@ $(function () {
 
   // result page
   resultPage = $('#resultPage');
+  $('#btnScore').on('click', function(){
+    redirect(function(){
+      answer.hide();
+    }, function(){
+      resultPage.show();
+    });
+  });
 
+
+  $('.ui-daiyan').on('ui.shown', function(e){
+    var self = this;
+    var $desc = $('.desc', this).hide(),
+      $photo = $('.photo', this).hide();
+
+    $desc.show()
+      .filter(':last').on(EVENT_ANIMATION_END, function(){
+        $photo.show().addClass('bounceInDown');
+      }).end()
+      .filter(':even').addClass('slideInLeft').end()
+      .filter(':odd').addClass('slideInRight');
+  });
+
+  $('.ui-shigan').on('ui.shown', function(e){
+    var self = this;
+    var $desc = $('.desc', this).hide(),
+        $numb = $('.number', this).hide();
+    animate(0);
+
+    function animate(index){
+      if(index > 3) return animateDescription(self);
+
+      $($desc.get(index)).show().addClass('bounceInDown');
+      $($numb.get(index)).show().addClass('swing');
+      setTimeout(function(){
+        animate(index + 1);
+      }, 300);
+    }
+  });
+
+  $('.ui-feiren').on('ui.shown', function(e){
+    var self = this;
+    var $time = $('.time', this).hide(),
+        $desc = $('.desc', this).hide();
+    animate(0);
+
+    function animate(index) {
+      if(index > 3) return animateDescription(self);
+
+      $($time.get(index)).show().addClass(!index&1? 'bounceInLeft' : 'bounceInRight');
+      $($desc.get(index)).show().addClass(!index&1? 'bounceInLeft' : 'bounceInRight');
+
+      setTimeout(function(){
+        animate(index + 1);
+      }, 300);
+    }
+  });
+
+  function animateDescription(scope){
+    var $text = $('.ui-answer-desc b', scope);
+    $text.addClass('animated rubberBand');
+  }
 });

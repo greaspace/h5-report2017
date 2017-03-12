@@ -3,22 +3,23 @@
 
 #answerPage.ui-page.animated
   .ui-scroll
-    .ui-scroll-inner.ui-daiyan.hidden
+    .ui-scroll-inner.ui-daiyan
       .ui-hd.text-center
-        img(src="./images/idiom/answer-daoshi-title.png")
+        img(src="./images/idiom/answer-daiyan-title.png")
       .ui-bd
         .container
           .text-center.ui-answer-desc
-            img(src="./images/idiom/answer-daiyan-desc.png")
+            p 因为是代言人，这一年来，
+            p "工匠精神"成为总理使用的高频词
         .ui-daiyan-content
           - for (var i=1; i<4; i++)
-            img.item.time(src="./images/idiom/answer-daiyan-time-"+i+".png" class="time-"+i)
-            img.item.photo(src="./images/idiom/answer-daiyan-photo-"+i+".png" class="photo-"+i)
-          div.item.desc.desc-1
+            img.item.time(src="./images/idiom/daiyan/time-"+i+".png" class="time-"+i)
+            img.item.photo.animated(src="./images/idiom/daiyan/photo-"+i+".png" class="photo-"+i)
+          div.item.desc.desc-1.animated
             | 李克强总理作政府工作报告时首次提出
             b "工匠精神"
             | 。
-          div.item.desc.desc-2
+          div.item.desc.desc-2.animated
             | 总理将
             b "工匠精神"
             | 与个人、企业和政务结合，总计
@@ -26,58 +27,77 @@
             | 次提及
             b "工匠精神"
             | 。
-          div.item.desc.desc-3
+          div.item.desc.desc-3.animated
             | 《咬文嚼字》杂志发布了"2016年十大流行语"，
             b "工匠精神"
             | 入选。
       .ui-ft.clearfix.text-center
-        a.ui-btn.ui-btn-next
+        a.ui-btn.ui-btn-next(data-idiom='简政放权')
 
-    .ui-scroll-inner.ui-shigan.hidden
+    .ui-scroll-inner.ui-shigan
       .ui-hd.text-center
         img(src="./images/idiom/answer-shigan-title.png")
       .ui-bd
         .container
           .text-center.ui-answer-desc
-            img(src="./images/idiom/answer-shigan-desc.png")
+            p 实干家干实事，
+            p
+              | 李克强总理紧抓"
+              b.animated.pulse 简政放权
+              | "这个改革的"
+              b.animated.pulse 牛鼻子
+              | ",
+            p
+              | 2016年取消
+              b.animated.pulse 152
+              | 项行政神品事项。
         .ui-shigan-content
           img.item.center(src="./images/idiom/answer-shigan-center.png")
           - for (var i=1; i<5; i++)
-            img.item.number(src="./images/idiom/shigan/p2_sup_"+i+".png" class="number-" + i)
-            img.item.desc(src="./images/idiom/shigan/p2_sub_"+i+".png" class="desc-" + i)
+            img.animated.item.number(src="./images/idiom/shigan/p2_sup_"+i+".png" class="number-" + i)
+            img.animated.item.desc(src="./images/idiom/shigan/p2_sub_"+i+".png" class="desc-" + i)
       .ui-ft.clearfix.text-center
-        a.ui-btn.ui-btn-next
+        a.ui-btn.ui-btn-next(data-idiom='体恤民心')
 
-    .ui-scroll-inner.ui-gongpu.hidden
+    .ui-scroll-inner.ui-gongpu
       .ui-hd.text-center
         img(src="./images/idiom/answer-gongpu-title.png")
-      .ui-bd.ui-gongpu.hidden
+      .ui-bd
         .container
           .text-center.ui-answer-desc
-            img(src="./images/idiom/gongpu/p3_font.png")
+            p 人民公仆心系人民、为人民。
+            p 2016年，李克强足迹踏遍全国
+              b 14个省
+              | (直辖市)，
+            p 多次深入基层，倾听民众心声。
         .ui-gongpu-content
           .item.time-line
           - for (var i=1; i<5; i++)
-            img.item(src="./images/idiom/gongpu/p3_sub_"+i+".png" class="item-"+i)
+            img.animated.slideInDown.item(src="./images/idiom/gongpu/p3_sub_"+i+".png" class="item-"+i)
       .ui-ft.clearfix.text-center
-        a.ui-btn.ui-btn-next
+        a.ui-btn.ui-btn-next(data-idiom='日理万机')
 
-    .ui-scroll-inner.ui-feiren.hidden
-      .ui-hd.text-center
-        img(src="./images/idiom/answer-feiren-title.png")
+    .ui-scroll-inner.ui-feiren
       .ui-hd.text-center
         img(src="./images/idiom/answer-feiren-title.png")
       .ui-bd
         .container
           .text-center.ui-answer-desc
-            img(src="./images/idiom/answer-feiren-desc.png")
+            p 2016年，
+            p 总理工出访
+              b 4
+              | 次，飞遍
+              b 3
+              | 大洲
+              b 10
+              | 个国家
         .ui-feiren-content
           .item.time-line
           - for (var i=1; i<5; i++)
-            img.item.time(src="./images/idiom/feiren/time-"+i+".png" class="time-"+i)
-            img.item.desc(src="./images/idiom/feiren/desc-"+i+".png" class="desc-"+i)
+            img.animated.item.time(src="./images/idiom/feiren/time-"+i+".png" class="time-"+i)
+            img.animated.item.desc(src="./images/idiom/feiren/desc-"+i+".png" class="desc-"+i)
       .ui-ft.clearfix.text-center
-        a.ui-btn.ui-btn-next
+        a.ui-btn.ui-btn-next(data-idiom='高瞻远瞩')
 
     .ui-scroll-inner.ui-tuixiao
       .ui-hd.text-center
@@ -88,10 +108,9 @@
             img(src="./images/idiom/answer-tuixiao-desc.png")
         .ui-tuixiao-centent
       .ui-ft.clearfix.text-center
-        a.ui-btn.ui-btn-next
-          img(src="./images/idiom/btn-next.png")
+        a.ui-btn.ui-btn-next(data-idiom='筚路蓝缕')
 
-    .ui-scroll-inner.ui-daoshi.hidden
+    .ui-scroll-inner.ui-daoshi
       .ui-hd.text-center
         img(src="./images/idiom/answer-daoshi-title.png")
       .ui-bd
@@ -104,5 +123,5 @@
             img.item.number(src="./images/idiom/daoshi/number-" + i + ".png" class="number-" + i)
             img.item.desc(src="./images/idiom/daoshi/desc-" + i + ".png" class="desc-" + i)
       .ui-ft.clearfix.text-center
-        a.ui-btn.ui-btn-like
-        a.ui-btn.ui-btn-score
+        a.ui-btn.ui-btn-like#btnLike
+        a.ui-btn.ui-btn-score#btnScore
