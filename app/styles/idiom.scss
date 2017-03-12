@@ -126,8 +126,6 @@ $loadingWrightLeft: 8px;
   background: url("../images/idiom/home-background.png") center bottom no-repeat;
   background-size: cover;
 
-  .ui-bd {
-  }
   .ui-bd-bg {
     position: absolute;
     width: 100%;
@@ -212,7 +210,7 @@ $loadingWrightLeft: 8px;
 
   .ui-home-play {
     position: absolute;
-    bottom: 10%;
+    bottom: 5%;
     text-align: center;
     width: 100%;
 
@@ -279,6 +277,8 @@ $loadingWrightLeft: 8px;
 // game page
 .idiom-game-image {
   width: 70%;
+  min-width: 224px;
+  min-height: 224px;
   margin: 0 auto;
   padding-top: 8%;
 
@@ -297,6 +297,7 @@ $loadingWrightLeft: 8px;
   color: #333;
   font-size: 24px;
   text-align: center;
+  margin-top: -25px;
 }
 
 $answerDefault: #ffe38f;
