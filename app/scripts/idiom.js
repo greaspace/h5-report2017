@@ -200,7 +200,9 @@ $(function () {
     $('#gameImage').attr('src', data.image);
     $('#gameAnswer').data('answer', key);
 
-    var source = data.input.split('').sort();
+    var source = data.input.split('');
+    var shift = source.shift();
+    source.sort().unshift(shift);
     $.each(source, function (i, item) {
       $($words.get(i)).text(item);
     });
