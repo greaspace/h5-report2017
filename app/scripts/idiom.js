@@ -18,17 +18,26 @@
 })(jQuery);
 
 $(function () {
+  var $audio = $('<audio>');
+  $audio.each(function () {
+    this.controls = false;
+    this.loop = true;
+    this.preload = true;
+    this.src='./images/idiom/bg.mp3';
+    this.autoplay = true;
+  }).hide().appendTo('#audio');
   $('#audio').on('click', function(e){
     e.preventDefault();
-
     var off = $(this).is('.off');
-
     // toggle class
     $(this).toggleClass('off');
-
     var audio = $('audio', this)[0];
     off ? audio.play() : audio.pause();
   });
+  // hack for wechat
+  document.addEventListener("WeixinJSBridgeReady", function () {
+    $audio.trigger('click');
+  }, false);
 
 
   var EVENT_ANIMATION_END = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
