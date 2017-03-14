@@ -18,6 +18,19 @@
 })(jQuery);
 
 $(function () {
+  $('#audio').on('click', function(e){
+    e.preventDefault();
+
+    var off = $(this).is('.off');
+
+    // toggle class
+    $(this).toggleClass('off');
+
+    var audio = $('audio', this)[0];
+    off ? audio.play() : audio.pause();
+  });
+
+
   var EVENT_ANIMATION_END = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
   var loading, home, game, answer, resultPage, currentIdiom;
   var rightAnswers = 0;
@@ -25,19 +38,24 @@ $(function () {
   // loading page
   loading = $('#loadingPage');
   loading.show(function () {
-    var percent = 0, text;
-    var si = setInterval(function () {
-      percent+=10;
-      if (percent <= 100) {
-        text = Math.floor(Math.random() * percent) + '%';
-      } else {
-        text = '100%';
-        clearInterval(si);
-
-        loading.trigger('load-finished');
+    var count = $('img').length;
+    $('img').each(function (i) {
+      var image = new Image();
+      image.index = i;
+      image.src = this.src;
+      if (image.complete){
+        callback.call(image);
+        return;
       }
-      $('.ui-loading-percent', loading).text(text);
-    }, 100);
+      image.onload = callback;
+
+      function callback(){
+        $('.ui-loading-percent', loading).text(Math.floor(100 * (this.index+1) / count) + '%');
+        if(this.index == count - 1){
+          loading.trigger('load-finished');
+        }
+      }
+    });
   }).addClass('fadeIn');
 
   // home page
@@ -227,7 +245,7 @@ $(function () {
       : 100;
     $('.score', this).attr('src', './images/idiom/result/score-'+score+'.png');
     $('.award', this).each(function(i){
-      if(i > rightAnswers) {
+      if(i >= rightAnswers) {
         $(this).hide();
       }
     });

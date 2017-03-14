@@ -288,7 +288,7 @@ $loadingWrightLeft: 8px;
   padding-top: 8%;
 
   .idiom-game-image-inner {
-    padding: 20px 23px 28px 25px;
+    padding: 0px 23px 28px 25px;
     background: url("../images/idiom/game-image-inner.png") center bottom no-repeat;
     background-size: cover;
   }
@@ -302,7 +302,7 @@ $loadingWrightLeft: 8px;
   color: #333;
   font-size: 24px;
   text-align: center;
-  margin-top: -25px;
+  margin-top: -20%;
 }
 
 $answerDefault: #ffe38f;
@@ -458,7 +458,7 @@ $controlColor: #dc4f53;
   }
 
   .ui-ft {
-    bottom: 64px;
+    bottom: 44px;
 
     .ui-btn{
       display: inline-block;
@@ -627,31 +627,31 @@ $controlColor: #dc4f53;
   top: 15%; bottom: 0; left: 15px; right: 15px;
 
   .time-line{
-    width: 28px;
-    height: 100%;
+    width: 24px;
+    height: 80%;
     background: url("../images/idiom/gongpu/p3_progress.png") no-repeat;
     background-position: center top;
     background-size: 100% auto;
     left: 50%;
-    margin-left: -14px;
+    margin-left: -12px;
   }
   img.item {
     width: 45%;
   }
 
   .item-1 {
-    top: 9%;
+    top: 30px;
   }
   .item-2 {
     right: 0;
-    top: 24%;
+    top: 80px;
   }
   .item-3 {
-    top: 42%;
+    top: 155px;
   }
   .item-4 {
     right: 0;
-    top: 60%;
+    top: 215px;
   }
 }
 
@@ -705,30 +705,30 @@ $controlColor: #dc4f53;
   top: 13%; bottom: 0; left: 15px; right: 15px;
 
   .time-line{
-    width: 120px;
+    width: 110px;
     height: 100%;
     background: url("../images/idiom/feiren/time-line.png") no-repeat;
     background-position: center top;
     background-size: 100% auto;
     left: 50%;
-    margin-left: -60px;
+    margin-left: -55px;
   }
 
   .time { width: 100px; }
   .time-1, .time-3 { right: 48.9%; }
   .time-2, .time-4 { left: 51.2%; }
-  .time-1 { top: 10%; }
-  .time-2 { top: 30%; }
-  .time-3 { top: 45%; }
-  .time-4 { top: 57%; }
+  .time-1 { top: 55px; }
+  .time-2 { top: 140px; }
+  .time-3 { top: 195px; }
+  .time-4 { top: 240px; }
 
   .desc {width: 50%}
   .desc-1, .desc-3 { right: 50%; }
   .desc-2, .desc-4 { left:  52%; }
-  .desc-1 { top: 17%; }
-  .desc-2 { top: 35%; }
-  .desc-3 { top: 52%; }
-  .desc-4 { top: 62%; }
+  .desc-1 { top: 85px; }
+  .desc-2 { top: 160px; }
+  .desc-3 { top: 225px; }
+  .desc-4 { top: 260px; }
 }
 
 .ui-daoshi-centent {
@@ -792,4 +792,59 @@ $controlColor: #dc4f53;
   right: 0;
   bottom: 0;
   display: none;
+}
+
+@keyframes amAudioPlaying {
+  from { transform: rotateZ(0deg) }
+  to { transform: rotateZ(360deg) }
+}
+
+#audio {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  display: block;
+  color: $textBlack;
+
+  &.off {
+    i.glyphicon-ban-circle {
+      display: block;
+    }
+    i.sup {
+      display: none;
+    }
+  }
+
+  i {
+    position: absolute;
+    font-size: 18px;
+
+    &.main {
+      left: 10px;
+      top: 12px;
+    }
+
+    &.glyphicon-ban-circle {
+      font-size: 26px;
+      left: 8px;
+      top: 10px;
+      font-weight: 200;
+      display: none;
+    }
+
+    &.sup {
+      font-size: 6px;
+      animation: amAudioPlaying 1.2s linear infinite;
+    }
+    &.sup1 {
+      left: 0px;
+      top: 7px;
+    }
+    &.sup2 {
+      left: 15px;
+      top: 0px;
+    }
+  }
 }
