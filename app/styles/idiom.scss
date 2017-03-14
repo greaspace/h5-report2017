@@ -809,24 +809,24 @@ $controlColor: #dc4f53;
   color: $textBlack;
 
   &.off {
-    i.glyphicon-ban-circle {
+    i.glyphicon-volume-off {
       display: block;
     }
-    i.sup {
+    i {
       display: none;
     }
   }
 
   i {
     position: absolute;
-    font-size: 18px;
+    font-size: 20px;
 
     &.main {
       left: 10px;
       top: 12px;
     }
 
-    &.glyphicon-ban-circle {
+    &.glyphicon-volume-off {
       font-size: 26px;
       left: 8px;
       top: 10px;
