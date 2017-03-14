@@ -218,6 +218,9 @@ $(function () {
       resultPage.show();
     });
   });
+  $('.ui-btn-replay').on('click', function(){
+    window.location.reload(true);
+  });
 
 
   $('.ui-daiyan').on('ui.shown', function(e){
@@ -250,6 +253,24 @@ $(function () {
     }
   });
 
+  $('.ui-tuixiao').on('ui.shown', function(e){
+    var self = this;
+    var $desc = $('.desc', this).hide();
+
+    $('.people', this).on(EVENT_ANIMATION_END, function(){
+      animate(0);
+    }).addClass('zoomIn');
+
+    function animate(index){
+      if(index > 3) return animateDescription(self);
+
+      $($desc.get(index)).show().addClass(index>1?'bounceInUp':'bounceInDown');
+      setTimeout(function(){
+        animate(index + 1);
+      }, 300);
+    }
+  });
+
   $('.ui-feiren').on('ui.shown', function(e){
     var self = this;
     var $time = $('.time', this).hide(),
@@ -268,8 +289,27 @@ $(function () {
     }
   });
 
+  $('.ui-daoshi').on('ui.shown', function(e){
+    var self = this;
+    var $desc = $('.desc', this).hide();
+
+    $('.decoration', this).on(EVENT_ANIMATION_END, function(){
+      animate(0);
+    }).addClass('zoomInUp');
+
+    function animate(index) {
+      if(index > 3) return animateDescription(self);
+
+      $($desc.get(index)).show().addClass('fadeInUp');
+
+      setTimeout(function(){
+        animate(index + 1);
+      }, 300);
+    }
+  });
+
   function animateDescription(scope){
     var $text = $('.ui-answer-desc b', scope);
-    $text.addClass('animated rubberBand');
+    $text.addClass('animated swing');
   }
 });

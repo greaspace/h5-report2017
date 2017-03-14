@@ -458,6 +458,8 @@ $controlColor: #dc4f53;
   }
 
   .ui-ft {
+    bottom: 64px;
+
     .ui-btn{
       display: inline-block;
 
@@ -565,12 +567,6 @@ $controlColor: #dc4f53;
   }
 }
 
-.ui-shigan {
-  .ui-ft{
-    bottom: 40px;
-  }
-}
-
 .ui-shigan-content {
   position: absolute;
   top: 13%; bottom: 0; left: 15px; right: 15px;
@@ -656,6 +652,48 @@ $controlColor: #dc4f53;
   .item-4 {
     right: 0;
     top: 60%;
+  }
+}
+
+.ui-tuixiao-content {
+  position: absolute;
+  top: 13%; bottom: 0; left: 15px; right: 15px;
+
+  .people {
+    width: 80%;
+    left: 15%;
+    top: 13%;
+  }
+  .doc {
+    width: 19.67%;
+    right: 10%;
+    top: 25%;
+  }
+  .heart {
+    width: 18.67%;
+    left: 15%;
+    top: 30%;
+  }
+
+  .desc-1 {
+    width: 38.53%;
+    left: 3%;
+    top: 10%;
+  }
+  .desc-2 {
+    width: 42%;
+    right: 0;
+    top: 8%;
+  }
+  .desc-3 {
+    width: 39.7%;
+    left: 0;
+    top: 43%;
+  }
+  .desc-4 {
+    width: 41.7%;
+    right: 0;
+    top: 43%;
   }
 }
 

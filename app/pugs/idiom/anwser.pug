@@ -105,8 +105,15 @@
       .ui-bd
         .container
           .text-center.ui-answer-desc
-            img(src="./images/idiom/answer-tuixiao-desc.png")
-        .ui-tuixiao-centent
+            p 李克强作为一名名副其实的"推销员"
+            p 2016年不仅极富远见地多次向外国领导人推销高铁，
+            p 还推销起了自行车。
+        .ui-tuixiao-content
+          img.animated.item.people(src="./images/idiom/tuixiao/people.png")
+          img.animated.item.heart(src="./images/idiom/tuixiao/heart.png")
+          img.animated.item.doc(src="./images/idiom/tuixiao/doc.png")
+          - for (var i=1; i<5; i++)
+            img.animated.item.desc(src="./images/idiom/tuixiao/desc-" + i + ".png" class="desc-" + i)
       .ui-ft.clearfix.text-center
         a.ui-btn.ui-btn-next(data-idiom='筚路蓝缕')
 
@@ -118,10 +125,10 @@
           .text-center.ui-answer-desc
             img(src="./images/idiom/answer-daoshi-desc.png")
         .ui-daoshi-centent
-          img.item.decoration(src="./images/idiom/daoshi/decoration.png")
+          img.animated.item.decoration(src="./images/idiom/daoshi/decoration.png")
           - for (var i=1; i<5; i++)
-            img.item.number(src="./images/idiom/daoshi/number-" + i + ".png" class="number-" + i)
-            img.item.desc(src="./images/idiom/daoshi/desc-" + i + ".png" class="desc-" + i)
+            img.animated.item.number(src="./images/idiom/daoshi/number-" + i + ".png" class="number-" + i)
+            img.animated.item.desc(src="./images/idiom/daoshi/desc-" + i + ".png" class="desc-" + i)
       .ui-ft.clearfix.text-center
         a.ui-btn.ui-btn-like#btnLike
         a.ui-btn.ui-btn-score#btnScore
