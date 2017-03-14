@@ -225,7 +225,7 @@ $(function () {
       : rightAnswers < 5 ? 70
       : rightAnswers < 6 ? 85
       : 100;
-    $('.score', this).attr("src", "./images/idiom/result/score-"+score+".png");
+    $('.score', this).attr('src', './images/idiom/result/score-'+score+'.png');
     $('.award', this).each(function(i){
       if(i > rightAnswers) {
         $(this).hide();
