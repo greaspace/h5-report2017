@@ -127,8 +127,9 @@
         .ui-daoshi-centent
           img.animated.item.decoration(src="./images/idiom/daoshi/decoration.png")
           - for (var i=1; i<5; i++)
-            img.animated.item.number(src="./images/idiom/daoshi/number-" + i + ".png" class="number-" + i)
-            img.animated.item.desc(src="./images/idiom/daoshi/desc-" + i + ".png" class="desc-" + i)
+            div.animated.item.desc(class="desc-" + i)
+              img.item.number(src="./images/idiom/daoshi/number-" + i + ".png" class="number-" + i)
+              img.desc-cont(src="./images/idiom/daoshi/desc-" + i + ".png")
       .ui-ft.clearfix.text-center
         a.ui-btn.ui-btn-like#btnLike
         a.ui-btn.ui-btn-score#btnScore

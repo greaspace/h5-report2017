@@ -722,7 +722,7 @@ $controlColor: #dc4f53;
   .time-3 { top: 45%; }
   .time-4 { top: 57%; }
 
-  .desc { width: 50%; }
+  .desc {width: 50%}
   .desc-1, .desc-3 { right: 50%; }
   .desc-2, .desc-4 { left:  52%; }
   .desc-1 { top: 17%; }
@@ -737,13 +737,14 @@ $controlColor: #dc4f53;
 
   .decoration { width: 60%; left: 20%; top: 5%; z-index: 15; }
 
-  .number { width: 40px; z-index: 20; }
-  .number-1 { left: 14.5%; top: 0}
-  .number-2 { right: 25%; top: 5%}
-  .number-3 { left: 19%; top: 38%}
-  .number-4 { right: 18%; top: 37%}
-
   .desc { width: 40%; }
+  .number { width: 40px; z-index: 20; }
+  .number-1 { left: 35%; top: -10px}
+  .number-2 { left: 32%; top: -5px}
+  .number-3 { left: 35%; top: -10px}
+  .number-4 { left: 30%; top: -5px}
+
+  .desc-cont { width: 100%; }
   .desc-1 { left: 0; top: 3%; z-index: 10;}
   .desc-2 { right: 8%; top: 7%; z-index: 10;}
   .desc-3 { left: 5%; top: 40%; z-index: 10;}
@@ -777,4 +778,18 @@ $controlColor: #dc4f53;
 .ui-btn-share {
   background: url("../images/idiom/result-btn-share.png") left top no-repeat;
   background-size: 110% auto;
+}
+
+#share {
+  position: absolute;
+  z-index: 9999;
+  background: #000 url("../images/idiom/share-tip.png") right 15px no-repeat;
+  background-size: 60% auto;
+  opacity: 0.8;
+  text-align: right;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
 }

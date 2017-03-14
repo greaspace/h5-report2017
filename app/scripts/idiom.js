@@ -221,6 +221,12 @@ $(function () {
   $('.ui-btn-replay').on('click', function(){
     window.location.reload(true);
   });
+  $('.ui-btn-share').on('click', function () {
+    $('#share').show();
+  });
+  $('#share').on('click', function(){
+    $(this).hide();
+  });
 
 
   $('.ui-daiyan').on('ui.shown', function(e){
