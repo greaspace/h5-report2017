@@ -35,7 +35,7 @@ $(function () {
     off ? audio.play() : audio.pause();
   });
   // hack for wechat
-  document.addEventListener("WeixinJSBridgeReady", function () {
+  document.addEventListener('WeixinJSBridgeReady', function () {
     $audio.trigger('click');
   }, false);
 
