@@ -20,6 +20,7 @@
 $(function () {
   var EVENT_ANIMATION_END = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
   var loading, home, game, answer, resultPage, currentIdiom;
+  var rightAnswers = 0;
 
   // loading page
   loading = $('#loadingPage');
@@ -82,6 +83,7 @@ $(function () {
     if(answered.length == 4) {
       var result = $this.data('answer');
       if(answered == result){
+        rightAnswers ++;
         $this.addClass('success');
         go();
       } else {
@@ -216,6 +218,18 @@ $(function () {
       answer.hide();
     }, function(){
       resultPage.show();
+    });
+  });
+  resultPage.on('ui.shown', function () {
+    var score = rightAnswers < 4 ? 50
+      : rightAnswers < 5 ? 70
+      : rightAnswers < 6 ? 85
+      : 100;
+    $('.score', this).attr("src", "./images/idiom/result/score-"+score+".png");
+    $('.award', this).each(function(i){
+      if(i > rightAnswers) {
+        $(this).hide();
+      }
     });
   });
   $('.ui-btn-replay').on('click', function(){
